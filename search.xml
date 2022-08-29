@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>在markdown文档中插入图片的方式</title>
+    <url>/2022/08/29/%E5%9C%A8markdown%E6%96%87%E6%A1%A3%E4%B8%AD%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E7%9A%84%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="插入图片的方法"><a href="#插入图片的方法" class="headerlink" title="插入图片的方法"></a>插入图片的方法</h1><p>在hexo中插入图片的语法为<code>![]()</code><br>其中【方括号】是图片描述，(圆括号)是图片路径。</p>
+<p>一般来说有三种图片路径，分别是相对路径，绝对路径和网络路径。<br><strong>网络路径</strong><br>直接引用网上的图片，直接复制图片地址，放在圆括号中就完事了。这种方式十分的方便，但是也存在一定的问题。</p>
+<ul>
+<li>图片失效导致无法加载；</li>
+<li>打开网页后要再请求加载图片；</li>
+<li>原网站限制，如微信公众号的图片会变得不可见等。</li>
+</ul>
+<p><strong>绝对路径</strong><br>文件在计算机中的绝对位置</p>
+<p><strong>相对路径</strong><br>相对于当前引用的文件路径</p>
+<p>在hexo中使用文章资源文件夹需要在config.yaml文件中更改一下配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">post_asset_folder: true</span><br></pre></td></tr></table></figure>
+<p>该项配置更改后，新建文档时会自动生成同名文件夹，用于存放文档资源。</p>
+<p>在实际使用中，虽然编辑器中可以预览到图片了，但是部署到网上之后会图片依然会无法显示，此时需要一个图片插件<u>hexo-renderer-marked</u>。使用npm指令可以快速安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-renderer-marked</span><br></pre></td></tr></table></figure>
+<p>安装后在config.yaml文件中更改一下配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">post_asset_folder: true</span><br><span class="line">marked:</span><br><span class="line">  prependRoot: true</span><br><span class="line">  postAsset: true</span><br></pre></td></tr></table></figure>
+
+<p>之后就可以在使用<code>![](image.jpg)</code>的方式愉快的插入图片了。</p>
+<h3 id="图片上传测试"><a href="#图片上传测试" class="headerlink" title="图片上传测试"></a>图片上传测试</h3><p><img src="/2022/08/29/%E5%9C%A8markdown%E6%96%87%E6%A1%A3%E4%B8%AD%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E7%9A%84%E6%96%B9%E5%BC%8F/%E5%85%AB%E9%87%8D%E6%A8%B1%E5%A3%81%E7%BA%B82.png" alt="八重樱壁纸"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>数据格式3Dtiles和osgb的学习</title>
+    <url>/2022/05/30/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F3Dtiles%E5%92%8Cosgb%E7%9A%84%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>今天整理了一下关于前几天学习模型格式的笔记</p>
+<h2 id="OSGB格式"><a href="#OSGB格式" class="headerlink" title="OSGB格式"></a>OSGB格式</h2><p>osgb格式的模型数据，无论是.s3c文件还是Data中的.osgb，打开都是人类难以理解的16进制码，只有.xml文件里记录了一些信息。<br>可以很明显的看到里面有投影坐标系、中央子午线、地理坐标系，地理坐标和高程等信息，程序在使用模型时，就可以根据这些位置信息，将文件夹中碎片的模型数据准确的摆放在正确的坐标上。而模型的数据，没有相应程序的解析就是个黑匣子（文件夹的名称也应当符合程序要求）。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;ModelMetadata version=&quot;1&quot;&gt;</span><br><span class="line">	&lt;SRS&gt;PROJCS[&amp;quot;CGCS2000 / 3-degree Gauss-Kruger CM 109.91666667E&amp;quot;,	    GEOGCS[&amp;quot;China Geodetic Coordinate System 2000&amp;quot;,	        DATUM[&amp;quot;China_2000&amp;quot;,	            SPHEROID[&amp;quot;CGCS2000&amp;quot;,6378137,298.257222101,	                AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;1024&amp;quot;]],	            AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;1043&amp;quot;]],	        PRIMEM[&amp;quot;Greenwich&amp;quot;,0,	            AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;8901&amp;quot;]],	        UNIT[&amp;quot;degree&amp;quot;,0.0174532925199433,	            AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;9122&amp;quot;]],	        AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;4490&amp;quot;]],	    PROJECTION[&amp;quot;Transverse_Mercator&amp;quot;],	    PARAMETER[&amp;quot;latitude_of_origin&amp;quot;,0],	    PARAMETER[&amp;quot;central_meridian&amp;quot;,109.91666667],	    PARAMETER[&amp;quot;scale_factor&amp;quot;,1],	    PARAMETER[&amp;quot;false_easting&amp;quot;,500000],	    PARAMETER[&amp;quot;false_northing&amp;quot;,0],	    UNIT[&amp;quot;metre&amp;quot;,1,	        AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;9001&amp;quot;]],	    AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;4545&amp;quot;]]&lt;/SRS&gt;</span><br><span class="line">	&lt;SRSOrigin&gt;507021.25,2057836.2,46.4&lt;/SRSOrigin&gt;</span><br><span class="line">&lt;/ModelMetadata&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3Dtiles格式"><a href="#3Dtiles格式" class="headerlink" title="3Dtiles格式"></a>3Dtiles格式</h2><p>而3Dtiles格式的数据，就有好多个可以阅读的文本。<br>也就是.json文件。但是要注意模型加载的前提是需要有顶层json路径，若没有则需要进行顶层重建。<br>下面是一段实例的展示：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;asset&quot;: &#123;</span><br><span class="line">		&quot;version&quot;: &quot;0.0&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;geometricError&quot;: 89.0000000063020877,</span><br><span class="line">	&quot;root&quot;: &#123;</span><br><span class="line">		&quot;boundingVolume&quot;: &#123;</span><br><span class="line">			&quot;sphere&quot;: [-1832255.4880568594671786, 4636065.7251678528264165, 3967474.6662561106495559, 92.5177488416835700]</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;refine&quot;: &quot;replace&quot;,</span><br><span class="line">		&quot;geometricError&quot;: 2,</span><br><span class="line">		&quot;content&quot;: &#123;</span><br><span class="line">			&quot;url&quot;: &quot;Tile_p000_p000.b3dm&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;children&quot;: [&#123;</span><br><span class="line">			&quot;boundingVolume&quot;: &#123;</span><br><span class="line">				&quot;sphere&quot;: [-1832256.7506676781922579, 4636064.3549550874158740, 3967471.9338256986811757, 53.0235926788538521]</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;geometricError&quot;: 1,</span><br><span class="line">			&quot;content&quot;: &#123;</span><br><span class="line">				&quot;url&quot;: &quot;Tile_p000_p000_L16_0.b3dm&quot;</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;children&quot;: [&#123;</span><br><span class="line">				&quot;boundingVolume&quot;: &#123;</span><br><span class="line">					&quot;sphere&quot;: [-1832256.7506676781922579, 4636064.3549550874158740, 3967471.9338256986811757, 53.0235926788538521]</span><br><span class="line">				&#125;,</span><br><span class="line">				&quot;geometricError&quot;: 0.5000000000000000,</span><br><span class="line">				&quot;content&quot;: &#123;</span><br><span class="line">					&quot;url&quot;: &quot;Tile_p000_p000_L17_00.b3dm&quot;</span><br><span class="line">				&#125;,</span><br><span class="line">				&quot;children&quot;: [&#123;</span><br><span class="line">					&quot;boundingVolume&quot;: &#123;</span><br><span class="line">						&quot;sphere&quot;: [-1832256.7506676781922579, 4636064.3549550874158740, 3967472.1795567460358143, 52.9021132641717458]</span><br><span class="line">					&#125;,</span><br><span class="line">					&quot;geometricError&quot;: 0.2500000000000000,</span><br><span class="line">					&quot;content&quot;: &#123;</span><br><span class="line">						&quot;url&quot;: &quot;Tile_p000_p000_L18_000.json&quot;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;]</span><br><span class="line">			&#125;]</span><br><span class="line">		&#125;]</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结合实际案例和一些其他资料，大概可以整理成下面这个样式。<br>虽然json的文件格式是可以直接阅读的，但是套娃式的复杂结构决定了实际在处理大批量数据时，还是要依靠机器处理。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;asset&quot;: &#123;&quot;version&quot;: &quot;0.0&quot;&#125;,\\记录整个数据集的声明和归属</span><br><span class="line"></span><br><span class="line">	&quot;geometricError&quot;: 89.0000000063020877,</span><br><span class="line">	\\几何误差，用来控制不同比例尺下模型的显隐。这个数值父级瓦片一定比子级瓦片大，可以理解为放大后就能看到更多的模型细节。</span><br><span class="line"></span><br><span class="line">	&quot;root&quot;: &#123;</span><br><span class="line">		&quot;boundingVolume&quot;: &#123;</span><br><span class="line">			&quot;sphere&quot;: [-1832255.4880568594671786, 4636065.7251678528264165, 3967474.6662561106495559, 92.5177488416835700]</span><br><span class="line">		&#125;,</span><br><span class="line">        \\boundingVolume 数据框架，有三种类型</span><br><span class="line"></span><br><span class="line">		&quot;refine&quot;: &quot;replace&quot;,</span><br><span class="line">		\\加载方式</span><br><span class="line"></span><br><span class="line">		&quot;geometricError&quot;: 2,</span><br><span class="line">		\\几何误差</span><br><span class="line"></span><br><span class="line">		&quot;content&quot;: &#123;</span><br><span class="line">			&quot;url&quot;: &quot;Tile_p000_p000.b3dm&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		\\content 这个root链接的数据的地址，好像url和uri都可以。可以是子结点的json。父节点可以无限引用子节点，但是子节点不能循环引用父结点。</span><br><span class="line"></span><br><span class="line">		&quot;children&quot;: [&#123;  ]&#125;</span><br><span class="line">		\\开始套娃，里面是这个root的子叶结点</span><br><span class="line"></span><br><span class="line"> 	&#125;\\root是数据集的根瓦片，记录了大量的信息。</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>3Dtiles允许数据集使用的四种树状结构：<br>四叉树、八叉树、KD树、格网结构。<br>四叉树可以理解为平面上的一个正方形，横竖两刀切成四块，也就成了四个子叶结点。<br>八叉树可以理解为四叉树增加了一个维度，变成一个正方体切三刀变为八个小正方体。<br>模型的树形分支构造也会影响加载速度，越大的切片文件加载越慢，根据实际需要进行选择。</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>3Dtiles的数据也是以瓦片形式保存的，而且瓦片的类型并不唯一，具体有</p>
+<h4 id="b3dm"><a href="#b3dm" class="headerlink" title="b3dm"></a>b3dm</h4><p>传统的三维建模数据、BIM数据、倾斜摄影数据。（也是做大范围场景最常用的数据）</p>
+<h4 id="i3dm"><a href="#i3dm" class="headerlink" title="i3dm"></a>i3dm</h4><p>一个模型多次渲染，例如路灯、售货机、摄像头</p>
+<h4 id="pnts"><a href="#pnts" class="headerlink" title="pnts"></a>pnts</h4><p>点云数据</p>
+<h4 id="cmpt"><a href="#cmpt" class="headerlink" title="cmpt"></a>cmpt</h4><p>前三种数据的符合，一个cmpt文件里可以内嵌多个其他类型的瓦片。</p>
+<p>3Dtiles的基础是glTF，全称为Graphics Language Transmission Format （图形语言传输格式），针对WebGL、OpenGL等接口的运行时数据传输格式。所以3Dtiles实际的文件后缀名是glTF决定的，而3Dtiles是为了加载海量的三维数据，在glTF的基础上加入了分层概念，使其适应倾斜摄影、点云等大规模数据的加载。<br>2017年公布glTF2.0标准，2022年初公布3Dtiles Next标准（二代）。</p>
+<h2 id="URL-URN-x3D-URI"><a href="#URL-URN-x3D-URI" class="headerlink" title="URL + URN &#x3D; URI"></a>URL + URN &#x3D; URI</h2><p>在使用模型时会遇到的<br>URL 统一资源定位符，是表示引用地址的字符串。主要用于连接网页、网页组件或网页程序，用访问方法来检索资源位置。<br>URL包含<br>1、用于访问资源的协议<br>2、服务器的位置<br>3、服务器端口号（可选）<br>4、资源在服务器目录结构中的位置<br>5、片段标识符（可选）<br>URI 统一资源标识符，标识逻辑或物理资源的字符序列。定义项目的标识，将一个资源与其他资源区分开。<br>URI 包含<br>1、Scheme（方案）<br>2、权限组件<br>3、查询（可选）<br>4、片段（可选）</p>
+<h2 id="一些其他知识点："><a href="#一些其他知识点：" class="headerlink" title="一些其他知识点："></a>一些其他知识点：</h2><p>1、osgb是对人类友好的对象型数据；3Dtiles格式则为对GPU友好的图形编程型数据，一切为了渲染速度服务。</p>
+<p>2、osgb到3Dtiles为单向转换，反向的成本过高几乎不考虑。</p>
+<p>3、使用FME也可以进行osgb对3Dtiles的转换（但是目前尝试没有成功）</p>
+<p>4、glTF1.0 和 glTF2.0 的不同可能会于Cesium的不同版本有不兼容的情况，过于深入暂不研究。</p>
+<h2 id="一些相关的软件平台："><a href="#一些相关的软件平台：" class="headerlink" title="一些相关的软件平台："></a>一些相关的软件平台：</h2><p>CesiumLab<br>Mars3D</p>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>3Dtiles</tag>
+        <tag>osgb</tag>
+        <tag>数据格式</tag>
+        <tag>Cusium</tag>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo升级与环境整理</title>
+    <url>/2022/05/26/hexo%E5%8D%87%E7%BA%A7%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<p>太长时间没打理blog了，现在抽空搞一搞。把本地文件复制到工作的小笔记本上，看着以前自己的笔记重新安装环境，设置连接，但是又发现了一堆问题，怎么也无法上传。</p>
+<p>百度了一下别人的代码进行一键升级。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用淘宝源的 cnpm 替换 npm</span><br><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line"></span><br><span class="line">cnpm install -g cnpm                 # 升级 npm</span><br><span class="line">cnpm cache clean -f                 # 清除 npm 缓存</span><br><span class="line"></span><br><span class="line">===更新 hexo: 进入 blog 目录，执行如下命令=== </span><br><span class="line"># 更新 package.json 中的 hexo 及个插件版本</span><br><span class="line">cnpm install -g npm-check           # 检查之前安装的插件，都有哪些是可以升级的 </span><br><span class="line">cnpm install -g npm-upgrade         # 升级系统中的插件</span><br><span class="line">npm-check</span><br><span class="line">npm-upgrade</span><br><span class="line"></span><br><span class="line"># 更新 hexo 及所有插件</span><br><span class="line">cnpm update</span><br><span class="line"></span><br><span class="line"># 确认 hexo 已经更新</span><br><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+
+<p>又发现个新警告：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">“use_date_for_updated“ is deprecated, please use “updated_option“ instead</span><br></pre></td></tr></table></figure>
+<p>就是官方把函数名改了，去配置文件_config.yml里把“use_date_for_updated”改成“updated_option“。</p>
+<p>然后又是在上传过程中的新错误</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spawn failed 128</span><br></pre></td></tr></table></figure>
+<p>首先尝试了删除.deploy_git文件夹，输入git config –global core.autocrlf false然后执行hexo clean清理缓存。<br>但并没有解决问题</p>
+<p>输入代码检测ssh是否生效</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh git@github.com</span><br></pre></td></tr></table></figure>
+<p>出现以下结果说明ssh正常</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">PTY allocation request failed on channel 0</span><br><span class="line">Hi [yourname]! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br><span class="line">Connection to github.com closed.</span><br></pre></td></tr></table></figure>
+
+<p>查了以下好像21年8月以后不支持用户名密码的方式认证了，要创建个人令牌。</p>
+<p>于是来到github官网，在个人设置（setting）中找到开发人员设置（Devoloper settings）<br>点击个人访问令牌（Personal access tokens），创建个令牌（Generate new token）</p>
+<p>设置令牌信息，时间可以选永久，许可可以全点上<br>得到令牌代码后复制保存，在登陆的时候就可以选择令牌登陆了</p>
+<p>hexo d之后等了一会儿，终于看到了更新。<br>至此一年多没打理的blog重新启用。</p>
+<hr>
+<p>补充：<br>第二天进行上传的时候又遇到了同样的问题，再补充一条代码后解决</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>hexo</tag>
+        <tag>升级</tag>
+        <tag>问题修复</tag>
+        <tag>github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Cesium学习-（一）环境搭建</title>
+    <url>/2022/05/20/Cesium%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h1 id="node-js和git的安装"><a href="#node-js和git的安装" class="headerlink" title="node.js和git的安装"></a>node.js和git的安装</h1><p>从官网下载即可。另外node需要把地址位置添加到系统变量里，方便使用。</p>
+<h1 id="安装cesium"><a href="#安装cesium" class="headerlink" title="安装cesium"></a>安装cesium</h1><p>获取cesium压缩包，直接解压使用<br>在命令行中进入当前目录，输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cnpm install</span><br></pre></td></tr></table></figure>
+<p>（安装时可能会遇到装不上等问题，检查是否安装cnpm（阿里定制的淘宝源的安装工具，替代npm），或者进行npm的源替换。）<br>输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node server.js</span><br></pre></td></tr></table></figure>
+<p>即可运行官方环境<br>跳出本地端口地址则启动成功，在浏览器输入端口地址打开主界面<br>例如：<br>localhost:4111&#x2F;helloworld.html</p>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>Cesium</tag>
+        <tag>Node.js</tag>
+        <tag>3Dtiles</tag>
+        <tag>模型</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何清除毒瘤DLL</title>
+    <url>/2020/02/25/%E5%A6%82%E4%BD%95%E6%B8%85%E9%99%A4%E6%AF%92%E7%98%A4DLL/</url>
+    <content><![CDATA[<h3 id="我的电脑居然被贴了小广告"><a href="#我的电脑居然被贴了小广告" class="headerlink" title="我的电脑居然被贴了小广告"></a>我的电脑居然被贴了小广告</h3><p>突然发现电脑里被莫名其妙的安装了好几个流氓软件，就好像发现自己家门口被贴了小广告一样，不停地在右下角弹广告，特别烦人，还很难清理掉，于是开始寻找它们隐藏的路径，赶尽杀绝。</p>
+<p>通过右键查看属性，还有任务管理器里的观察，我发现这些个牛皮癣喜欢藏在这两个目录：</p>
+<p>C:&#x2F;User&#x2F;Administrator&#x2F;AppData&#x2F;Local</p>
+<p>C:&#x2F;User&#x2F;Administrator&#x2F;AppData&#x2F;Roaming</p>
+<p>或者直接利用电脑的搜索功能，直接在C盘里搜索毒瘤软件的名字，把找到的目录全都干掉。</p>
+<p>但是这样并没有结束，不然也不叫“牛皮癣了”</p>
+<h3 id="清理注册表"><a href="#清理注册表" class="headerlink" title="清理注册表"></a>清理注册表</h3><p>虽然大佬们习惯用命令行，但win10直接利用桌面的搜索功能，就能直接找到注册表管理器了，更方便。</p>
+<p>同样的，直接在管理器搜索毒瘤软件的名字，看到一个干掉一个。</p>
+<h3 id="清除DLL-动态链接库"><a href="#清除DLL-动态链接库" class="headerlink" title="清除DLL(动态链接库)"></a>清除DLL(动态链接库)</h3><p>在清除软件时，经常会发现，XXX文件正在被占用、正在运行，无法删除，要我们先关闭程序。</p>
+<p>通过tasklist命令，可以将任务管理器的状态输出到文本，这样就可以很方便的用TXT文档的查找功能，锁定DLL的相关应用，然后在任务管理器里把它强制结束掉。win10可以在菜单栏直接右键打开任务管理器，非常方便。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tasklist /m&gt;d:\123.txt </span><br></pre></td></tr></table></figure>
+
+<p>还有一些例如Unlocker的第三方软件，可以查询文件被哪个进程锁定，也可以帮助我们去关闭进程，删除文件。</p>
+<h3 id="毒瘤DLL黑入资源管理器"><a href="#毒瘤DLL黑入资源管理器" class="headerlink" title="毒瘤DLL黑入资源管理器"></a>毒瘤DLL黑入资源管理器</h3><p>有些时候（经常）那些删不掉的文件，一查它的进程，居然是Explorer.exe，那就不能随便强制结束了</p>
+<p>Explorer 就是系统时时刻刻都在运行的桌面，在win10中，因为中文显示优化的原因，它在任务管理器中也显示为“Windows 资源管理器”。一旦这个进程终止，桌面也会随之黑掉，但已经启动的应用基本不受影响。</p>
+<p>这时也可以根据先结束进程，再杀掉文件的原理，通过关闭桌面来杀掉毒瘤DLL。但是也因为要关闭桌面，正常的图形界面就无法使用了，必须借助控制台来操作。</p>
+<ol>
+<li>找到文件的路径，复制下来</li>
+<li>以管理员限权，运行控制台CMD</li>
+<li>任务管理器结束资源管理器进程，关闭桌面，这时候桌面会直接灰掉。</li>
+<li>通过控制台，cd指令，进入到文件的路径下。</li>
+<li>通过 Del 文件名 的命令，删除文件（注意中间有空格）。</li>
+<li>在任务管理器中新建进程，输入Explorer.exe，重新启动桌面。</li>
+</ol>
+<p>到此一切终于回到了正轨。桌面终于清静了。</p>
+<p>相比这么麻烦的清理步骤，还是平时注意保持健康的使用习惯更为重要。</p>
+<p>（我看到那几个毒瘤DLL的修改记录，居然是去年就已经在我的电脑里了，欺负我以前不懂）</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>电脑清理</tag>
+        <tag>DLL清理</tag>
+        <tag>毒瘤软件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在网页上加入live2D人偶</title>
+    <url>/2020/02/14/%E5%9C%A8%E7%BD%91%E9%A1%B5%E4%B8%8A%E5%8A%A0%E5%85%A5live2D%E4%BA%BA%E5%81%B6/</url>
+    <content><![CDATA[<p>明明是前几天才刚搭好博客，搞好主题，又忍不住要下手搞点新东西了。</p>
+<p>博客页面只有图片和文字，未免有些太枯燥乏味，于是就想加入一个桌面宠物。</p>
+<h2 id="1-安装live-2d插件"><a href="#1-安装live-2d插件" class="headerlink" title="1. 安装live 2d插件"></a>1. 安装live 2d插件</h2><p>在hexo的目录下，输入指令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
+
+<p>安装live2D的网页显示插件。</p>
+<p>指令结束后，会发现博客目录中多了一个几十MB大小的node_modules文件夹</p>
+<h2 id="2-下载模板"><a href="#2-下载模板" class="headerlink" title="2.下载模板"></a>2.下载模板</h2><p>github仓库链接: <a href="https://github.com/kw1649190133/live2d-widget-models">https://github.com/kw1649190133/live2d-widget-models</a></p>
+<p>模型包中包括二十余个模型，选一个自己喜欢的丢进node_modules文件夹中即可。</p>
+<h2 id="3-在配置文件中加入设定"><a href="#3-在配置文件中加入设定" class="headerlink" title="3.在配置文件中加入设定"></a>3.在配置文件中加入设定</h2><p>打开根目录下的配置文件_config.yml ，插入以下内容：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  pluginModelPath: assets/</span><br><span class="line">  tagMode: false # 标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中</span><br><span class="line">  debug: false # 调试, 是否在控制台输出日志</span><br><span class="line">  model:</span><br><span class="line">    use: live2d-widget-model-koharu  #模板目录，在node_modules里</span><br><span class="line">  display:</span><br><span class="line">    position: right</span><br><span class="line">    width: 200 </span><br><span class="line">    height: 350</span><br><span class="line">  mobile:</span><br><span class="line">    show: true  #是否在手机进行显示</span><br><span class="line">    scale: 0.4 # 移动设备上的缩放比例</span><br></pre></td></tr></table></figure>
+
+
+
+<p>至此live2D配置完成，保存后刷新页面，即可显示。</p>
+<p>关于live2D插件的更多细节问题可以到官方资料站查询</p>
+<p><a href="https://l2dwidget.js.org/docs/function/index.html#static-function-config">https://l2dwidget.js.org/docs/function/index.html#static-function-config</a></p>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>live2D</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo文档编写基本操作</title>
+    <url>/2020/02/12/hexo%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h2 id="1-分级标题"><a href="#1-分级标题" class="headerlink" title="1. 分级标题"></a>1. 分级标题</h2><p>行首加 “#” 表示不同级别的标题 (H1-H6)。“#” 后最好空一格。H1最大，H6最小。并且目录的自动生成也是按照标题来嵌套的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br></pre></td></tr></table></figure>
+<h2 id="2-文字强调"><a href="#2-文字强调" class="headerlink" title="2. 文字强调"></a>2. 文字强调</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*内容*---斜体文字</span><br><span class="line">**内容**---加粗文字</span><br><span class="line">***内容***---粗斜体文字</span><br></pre></td></tr></table></figure>
+<h2 id="3-列表"><a href="#3-列表" class="headerlink" title="3. 列表"></a>3. 列表</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*+-表示无序列表。</span><br><span class="line"></span><br><span class="line">* 测试0</span><br><span class="line">* 测试1</span><br><span class="line">* 测试2</span><br><span class="line">+ 测试3</span><br><span class="line">+ 测试4</span><br><span class="line">+ 测试5</span><br><span class="line">- 测试6</span><br><span class="line">- 测试7</span><br><span class="line">- 测试8</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">数字和点1.2.3.表示有序列表。字符后须空一格。</span><br><span class="line"></span><br><span class="line">1. 测试1</span><br><span class="line">2. 测试2</span><br><span class="line">3. 测试3</span><br><span class="line">4. 测试4</span><br><span class="line">5. 测试5</span><br></pre></td></tr></table></figure>
+<h2 id="4-引用"><a href="#4-引用" class="headerlink" title="4. 引用"></a>4. 引用</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt;引用  </span><br><span class="line">&gt;&gt; 引用中引用</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-文本居中的引用"><a href="#5-文本居中的引用" class="headerlink" title="5. 文本居中的引用"></a>5. 文本居中的引用</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% cq %&#125; </span><br><span class="line">文本居中的引用</span><br><span class="line">测试</span><br><span class="line">测试2  </span><br><span class="line">&#123;% endcq %&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6-分割线"><a href="#6-分割线" class="headerlink" title="6. 分割线"></a>6. 分割线</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">***</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-删除线和下划线"><a href="#7-删除线和下划线" class="headerlink" title="7. 删除线和下划线"></a>7. 删除线和下划线</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">~~内容~~---删除线</span><br><span class="line">&lt;u&gt;内容&lt;/u&gt;---下划线</span><br></pre></td></tr></table></figure>
+<h2 id="8-行内代码"><a href="#8-行内代码" class="headerlink" title="8. 行内代码"></a>8. 行内代码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">`内容`</span><br></pre></td></tr></table></figure>
+<h2 id="9-代码块"><a href="#9-代码块" class="headerlink" title="9. 代码块"></a>9. 代码块</h2><p>文字上下方直接加 ``` 即可</p>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo Blog搭建过程</title>
+    <url>/2020/02/12/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="第一步-准备工作"><a href="#第一步-准备工作" class="headerlink" title="第一步 准备工作"></a><strong>第一步 准备工作</strong></h1><h2 id="1-安装node-js"><a href="#1-安装node-js" class="headerlink" title="1. 安装node.js"></a>1. 安装node.js</h2><p>官方网站 <a href="https://nodejs.org/zh-cn/">https://nodejs.org/zh-cn/</a></p>
+<h2 id="2-注册github"><a href="#2-注册github" class="headerlink" title="2. 注册github"></a>2. 注册github</h2><p>官方网站 <a href="https://github.com/">https://github.com</a><br>在github上建立一个仓库。而这个仓库名很讲究，必须和github账户名一致。<br>（可能和某些设置有关，应该是可以修改的。）<br>例如 kw1649190133.github.io </p>
+<h2 id="3-安装git（根据自己的系统来安装。）"><a href="#3-安装git（根据自己的系统来安装。）" class="headerlink" title="3. 安装git（根据自己的系统来安装。）"></a>3. 安装git（根据自己的系统来安装。）</h2><p>官方网站 <a href="https://git-scm.com/">https://git-scm.com/</a></p>
+<h2 id="4-配置SHH"><a href="#4-配置SHH" class="headerlink" title="4. 配置SHH"></a>4. 配置SHH</h2><p>打开git，进入指令框界面<br>输入指令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C &quot;你的邮箱&quot;  回车</span><br></pre></td></tr></table></figure>
+
+<p>打开本地目录（一般在用户&#x2F;Administarator&#x2F;.ssh）<br>打开第二个文件id_ras.pub 复制里面的ssh秘钥粘贴到github网站上。<br>(个人账户-&gt;setting-&gt;ssh，为后面的上传做准备的)</p>
+<h1 id="第二步-创建博客"><a href="#第二步-创建博客" class="headerlink" title="第二步 创建博客"></a><strong>第二步 创建博客</strong></h1><p>使用node.js 本地一键创建博客</p>
+<h2 id="1-打开CMD控制台指令框，前往想要创建博客的目录（例如）D-x2F-blog"><a href="#1-打开CMD控制台指令框，前往想要创建博客的目录（例如）D-x2F-blog" class="headerlink" title="1. 打开CMD控制台指令框，前往想要创建博客的目录（例如）D:&#x2F;blog"></a>1. 打开CMD控制台指令框，前往想要创建博客的目录（例如）D:&#x2F;blog</h2><blockquote>
+<p>关于CMD改变路径的基本操作：<br>    + 跳转到另一个盘,直接敲字母+冒号  “D:”<br>    + 进入文件夹，用指令cd  “cd 想要进入的文件夹”<br>    + 返回上一级，输入     “cd ..”  ）</p>
+</blockquote>
+<h2 id="2-在hexo-io官网上有一键部署命令："><a href="#2-在hexo-io官网上有一键部署命令：" class="headerlink" title="2. 在hexo.io官网上有一键部署命令："></a>2. 在hexo.io官网上有一键部署命令：</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-cli -g   </span><br></pre></td></tr></table></figure>
+<p>直接输入然后回车就行。</p>
+<h2 id="3-一键创建。-其实也是创建文件夹，指令为："><a href="#3-一键创建。-其实也是创建文件夹，指令为：" class="headerlink" title="3. 一键创建。 其实也是创建文件夹，指令为："></a>3. 一键创建。 其实也是创建文件夹，指令为：</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init 博客名</span><br></pre></td></tr></table></figure>
+<h2 id="4-然后进入到该目录下（指令为cd-博客名）"><a href="#4-然后进入到该目录下（指令为cd-博客名）" class="headerlink" title="4. 然后进入到该目录下（指令为cd 博客名）"></a>4. 然后进入到该目录下（指令为cd 博客名）</h2><p>安装npm  指令:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p>所以创建博客其实只需要一个命令罢了，非常简单。<br><br>接下来可以在本地浏览博客，有两个方法<br>1.看b站大佬学的方法<br>hexo部署本地 指令:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s -p 数字</span><br></pre></td></tr></table></figure>
+<p>在浏览器输入localhost:数字，即可访问本地博客<br>2.hexo官方提供的方法<br>直接输入:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p>这样博客的默认地址就是localhost:4000了。<br>（此时控制台处于批处理状态，需要根据提示按相应的操作来解除 (ctrl+c))</p>
+<h1 id="第二点五步-装个文本编辑器"><a href="#第二点五步-装个文本编辑器" class="headerlink" title="第二点五步 装个文本编辑器"></a><strong>第二点五步 装个文本编辑器</strong></h1><p>（不嫌以后麻烦可以跳过，当然以后再装也行）<br>安装一个文本编辑器便于编辑网页<br>这玩意的好处在于除了界面美观，还可以直接把文件夹拖入编辑器，编辑器就能直接获取整个文件夹的目录，非常方便好使。<br><del>notepad++或者sublime Text</del><br>算了用sublime 吧，界面好看点。notepad的死亡配色令人难以言喻</p>
+<h1 id="第三步-部署到github上"><a href="#第三步-部署到github上" class="headerlink" title="第三步 部署到github上"></a><strong>第三步 部署到github上</strong></h1><p>打开创建好的博客框架， /source/_posts<br>就是博客文章所在的目录，每一篇博客都是一个 ‘.md’ 的文件，可以直接编辑。<br>在根目录的_config.yml，就是网页的相关配置文件<br>##</p>
+<h2 id="1-修改配置文件"><a href="#1-修改配置文件" class="headerlink" title="1. 修改配置文件"></a>1. 修改配置文件</h2><h3 id="设置博客地址"><a href="#设置博客地址" class="headerlink" title="+ 设置博客地址"></a>+ 设置博客地址</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">url:http://kw1649190133.github.io</span><br></pre></td></tr></table></figure>
+<h3 id="配置与仓库的链接（把下面这段直接复制然后贴到配置文件的最下面就行）"><a href="#配置与仓库的链接（把下面这段直接复制然后贴到配置文件的最下面就行）" class="headerlink" title="+ 配置与仓库的链接（把下面这段直接复制然后贴到配置文件的最下面就行）"></a>+ 配置与仓库的链接（把下面这段直接复制然后贴到配置文件的最下面就行）</h3><p>需要注意严格遵守格式，比如缩进规则。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">   type: git</span><br><span class="line">   repo: https://github.com/kw1649190133/kw1649190133.github.io.git     </span><br><span class="line">   branch: master</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-安装一键上传的插件：hexo-deployer-git"><a href="#2-安装一键上传的插件：hexo-deployer-git" class="headerlink" title="2. 安装一键上传的插件：hexo-deployer-git"></a>2. 安装一键上传的插件：hexo-deployer-git</h2><p>打开命令行，前往博客的本地目录<br>在该目录下输入指令:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-deployer-git-save </span><br></pre></td></tr></table></figure>
+<p>就算安装完成了</p>
+<h2 id="3-运行hexo-g，生成静态文件"><a href="#3-运行hexo-g，生成静态文件" class="headerlink" title="3. 运行hexo g，生成静态文件"></a>3. 运行hexo g，生成静态文件</h2><p>还是在博客目录下的指令行框中，<br>输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt;hexo generate  （或者简写为hexo g）</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-账户信息设置"><a href="#4-账户信息设置" class="headerlink" title="4. 账户信息设置"></a>4. 账户信息设置</h2><p>因为是第一次使用可能需要填一下相关信息（还是在指令框中）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt;git config --global user.email &quot;在这填你的github邮箱&quot;</span><br><span class="line">&gt;git config --global user.name &quot;填你的用户名&quot; </span><br></pre></td></tr></table></figure>
+
+<h2 id="5-上传到github仓库"><a href="#5-上传到github仓库" class="headerlink" title="5. 上传到github仓库"></a>5. 上传到github仓库</h2><p>然后运行hexo d，部署网站（也被称为一键部署）<br>最后一步了，还是在指令框输入 hexo deploy  (简写做hexo d)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo d	</span><br></pre></td></tr></table></figure>
+<p>然后会弹一个小框框让你输github的邮箱和密码，成功登陆后博客上传到github仓库中，通过之前设定的 用户名.github.io 这个地址，就可以访问博客了。</p>
+<p><br><strong>至此一个轻量级的静态博客搭建完成。</strong></br><br><br><strong>后续还可以进行主题的更换，插件的安装等等各种添油加醋的操作。</strong></br></p>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+</search>

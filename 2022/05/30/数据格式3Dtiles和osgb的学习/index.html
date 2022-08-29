@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    数据格式3Dtiles和osgb的学习 |  kw&#39;s blog
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="kw's blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-数据格式3Dtiles和osgb的学习" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  数据格式3Dtiles和osgb的学习
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/05/30/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F3Dtiles%E5%92%8Cosgb%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2022-05-30T10:00:00.000Z" itemprop="datePublished">2022-05-30</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.6k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">7分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p>今天整理了一下关于前几天学习模型格式的笔记</p>
+<h2 id="OSGB格式"><a href="#OSGB格式" class="headerlink" title="OSGB格式"></a>OSGB格式</h2><p>osgb格式的模型数据，无论是.s3c文件还是Data中的.osgb，打开都是人类难以理解的16进制码，只有.xml文件里记录了一些信息。<br>可以很明显的看到里面有投影坐标系、中央子午线、地理坐标系，地理坐标和高程等信息，程序在使用模型时，就可以根据这些位置信息，将文件夹中碎片的模型数据准确的摆放在正确的坐标上。而模型的数据，没有相应程序的解析就是个黑匣子（文件夹的名称也应当符合程序要求）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;ModelMetadata version=&quot;1&quot;&gt;</span><br><span class="line">	&lt;SRS&gt;PROJCS[&amp;quot;CGCS2000 / 3-degree Gauss-Kruger CM 109.91666667E&amp;quot;,	    GEOGCS[&amp;quot;China Geodetic Coordinate System 2000&amp;quot;,	        DATUM[&amp;quot;China_2000&amp;quot;,	            SPHEROID[&amp;quot;CGCS2000&amp;quot;,6378137,298.257222101,	                AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;1024&amp;quot;]],	            AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;1043&amp;quot;]],	        PRIMEM[&amp;quot;Greenwich&amp;quot;,0,	            AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;8901&amp;quot;]],	        UNIT[&amp;quot;degree&amp;quot;,0.0174532925199433,	            AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;9122&amp;quot;]],	        AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;4490&amp;quot;]],	    PROJECTION[&amp;quot;Transverse_Mercator&amp;quot;],	    PARAMETER[&amp;quot;latitude_of_origin&amp;quot;,0],	    PARAMETER[&amp;quot;central_meridian&amp;quot;,109.91666667],	    PARAMETER[&amp;quot;scale_factor&amp;quot;,1],	    PARAMETER[&amp;quot;false_easting&amp;quot;,500000],	    PARAMETER[&amp;quot;false_northing&amp;quot;,0],	    UNIT[&amp;quot;metre&amp;quot;,1,	        AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;9001&amp;quot;]],	    AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;4545&amp;quot;]]&lt;/SRS&gt;</span><br><span class="line">	&lt;SRSOrigin&gt;507021.25,2057836.2,46.4&lt;/SRSOrigin&gt;</span><br><span class="line">&lt;/ModelMetadata&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3Dtiles格式"><a href="#3Dtiles格式" class="headerlink" title="3Dtiles格式"></a>3Dtiles格式</h2><p>而3Dtiles格式的数据，就有好多个可以阅读的文本。<br>也就是.json文件。但是要注意模型加载的前提是需要有顶层json路径，若没有则需要进行顶层重建。<br>下面是一段实例的展示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;asset&quot;: &#123;</span><br><span class="line">		&quot;version&quot;: &quot;0.0&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;geometricError&quot;: 89.0000000063020877,</span><br><span class="line">	&quot;root&quot;: &#123;</span><br><span class="line">		&quot;boundingVolume&quot;: &#123;</span><br><span class="line">			&quot;sphere&quot;: [-1832255.4880568594671786, 4636065.7251678528264165, 3967474.6662561106495559, 92.5177488416835700]</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;refine&quot;: &quot;replace&quot;,</span><br><span class="line">		&quot;geometricError&quot;: 2,</span><br><span class="line">		&quot;content&quot;: &#123;</span><br><span class="line">			&quot;url&quot;: &quot;Tile_p000_p000.b3dm&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;children&quot;: [&#123;</span><br><span class="line">			&quot;boundingVolume&quot;: &#123;</span><br><span class="line">				&quot;sphere&quot;: [-1832256.7506676781922579, 4636064.3549550874158740, 3967471.9338256986811757, 53.0235926788538521]</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;geometricError&quot;: 1,</span><br><span class="line">			&quot;content&quot;: &#123;</span><br><span class="line">				&quot;url&quot;: &quot;Tile_p000_p000_L16_0.b3dm&quot;</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;children&quot;: [&#123;</span><br><span class="line">				&quot;boundingVolume&quot;: &#123;</span><br><span class="line">					&quot;sphere&quot;: [-1832256.7506676781922579, 4636064.3549550874158740, 3967471.9338256986811757, 53.0235926788538521]</span><br><span class="line">				&#125;,</span><br><span class="line">				&quot;geometricError&quot;: 0.5000000000000000,</span><br><span class="line">				&quot;content&quot;: &#123;</span><br><span class="line">					&quot;url&quot;: &quot;Tile_p000_p000_L17_00.b3dm&quot;</span><br><span class="line">				&#125;,</span><br><span class="line">				&quot;children&quot;: [&#123;</span><br><span class="line">					&quot;boundingVolume&quot;: &#123;</span><br><span class="line">						&quot;sphere&quot;: [-1832256.7506676781922579, 4636064.3549550874158740, 3967472.1795567460358143, 52.9021132641717458]</span><br><span class="line">					&#125;,</span><br><span class="line">					&quot;geometricError&quot;: 0.2500000000000000,</span><br><span class="line">					&quot;content&quot;: &#123;</span><br><span class="line">						&quot;url&quot;: &quot;Tile_p000_p000_L18_000.json&quot;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;]</span><br><span class="line">			&#125;]</span><br><span class="line">		&#125;]</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结合实际案例和一些其他资料，大概可以整理成下面这个样式。<br>虽然json的文件格式是可以直接阅读的，但是套娃式的复杂结构决定了实际在处理大批量数据时，还是要依靠机器处理。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;asset&quot;: &#123;&quot;version&quot;: &quot;0.0&quot;&#125;,\\记录整个数据集的声明和归属</span><br><span class="line"></span><br><span class="line">	&quot;geometricError&quot;: 89.0000000063020877,</span><br><span class="line">	\\几何误差，用来控制不同比例尺下模型的显隐。这个数值父级瓦片一定比子级瓦片大，可以理解为放大后就能看到更多的模型细节。</span><br><span class="line"></span><br><span class="line">	&quot;root&quot;: &#123;</span><br><span class="line">		&quot;boundingVolume&quot;: &#123;</span><br><span class="line">			&quot;sphere&quot;: [-1832255.4880568594671786, 4636065.7251678528264165, 3967474.6662561106495559, 92.5177488416835700]</span><br><span class="line">		&#125;,</span><br><span class="line">        \\boundingVolume 数据框架，有三种类型</span><br><span class="line"></span><br><span class="line">		&quot;refine&quot;: &quot;replace&quot;,</span><br><span class="line">		\\加载方式</span><br><span class="line"></span><br><span class="line">		&quot;geometricError&quot;: 2,</span><br><span class="line">		\\几何误差</span><br><span class="line"></span><br><span class="line">		&quot;content&quot;: &#123;</span><br><span class="line">			&quot;url&quot;: &quot;Tile_p000_p000.b3dm&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		\\content 这个root链接的数据的地址，好像url和uri都可以。可以是子结点的json。父节点可以无限引用子节点，但是子节点不能循环引用父结点。</span><br><span class="line"></span><br><span class="line">		&quot;children&quot;: [&#123;  ]&#125;</span><br><span class="line">		\\开始套娃，里面是这个root的子叶结点</span><br><span class="line"></span><br><span class="line"> 	&#125;\\root是数据集的根瓦片，记录了大量的信息。</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>3Dtiles允许数据集使用的四种树状结构：<br>四叉树、八叉树、KD树、格网结构。<br>四叉树可以理解为平面上的一个正方形，横竖两刀切成四块，也就成了四个子叶结点。<br>八叉树可以理解为四叉树增加了一个维度，变成一个正方体切三刀变为八个小正方体。<br>模型的树形分支构造也会影响加载速度，越大的切片文件加载越慢，根据实际需要进行选择。</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>3Dtiles的数据也是以瓦片形式保存的，而且瓦片的类型并不唯一，具体有</p>
+<h4 id="b3dm"><a href="#b3dm" class="headerlink" title="b3dm"></a>b3dm</h4><p>传统的三维建模数据、BIM数据、倾斜摄影数据。（也是做大范围场景最常用的数据）</p>
+<h4 id="i3dm"><a href="#i3dm" class="headerlink" title="i3dm"></a>i3dm</h4><p>一个模型多次渲染，例如路灯、售货机、摄像头</p>
+<h4 id="pnts"><a href="#pnts" class="headerlink" title="pnts"></a>pnts</h4><p>点云数据</p>
+<h4 id="cmpt"><a href="#cmpt" class="headerlink" title="cmpt"></a>cmpt</h4><p>前三种数据的符合，一个cmpt文件里可以内嵌多个其他类型的瓦片。</p>
+<p>3Dtiles的基础是glTF，全称为Graphics Language Transmission Format （图形语言传输格式），针对WebGL、OpenGL等接口的运行时数据传输格式。所以3Dtiles实际的文件后缀名是glTF决定的，而3Dtiles是为了加载海量的三维数据，在glTF的基础上加入了分层概念，使其适应倾斜摄影、点云等大规模数据的加载。<br>2017年公布glTF2.0标准，2022年初公布3Dtiles Next标准（二代）。</p>
+<h2 id="URL-URN-x3D-URI"><a href="#URL-URN-x3D-URI" class="headerlink" title="URL + URN &#x3D; URI"></a>URL + URN &#x3D; URI</h2><p>在使用模型时会遇到的<br>URL 统一资源定位符，是表示引用地址的字符串。主要用于连接网页、网页组件或网页程序，用访问方法来检索资源位置。<br>URL包含<br>1、用于访问资源的协议<br>2、服务器的位置<br>3、服务器端口号（可选）<br>4、资源在服务器目录结构中的位置<br>5、片段标识符（可选）<br>URI 统一资源标识符，标识逻辑或物理资源的字符序列。定义项目的标识，将一个资源与其他资源区分开。<br>URI 包含<br>1、Scheme（方案）<br>2、权限组件<br>3、查询（可选）<br>4、片段（可选）</p>
+<h2 id="一些其他知识点："><a href="#一些其他知识点：" class="headerlink" title="一些其他知识点："></a>一些其他知识点：</h2><p>1、osgb是对人类友好的对象型数据；3Dtiles格式则为对GPU友好的图形编程型数据，一切为了渲染速度服务。</p>
+<p>2、osgb到3Dtiles为单向转换，反向的成本过高几乎不考虑。</p>
+<p>3、使用FME也可以进行osgb对3Dtiles的转换（但是目前尝试没有成功）</p>
+<p>4、glTF1.0 和 glTF2.0 的不同可能会于Cesium的不同版本有不兼容的情况，过于深入暂不研究。</p>
+<h2 id="一些相关的软件平台："><a href="#一些相关的软件平台：" class="headerlink" title="一些相关的软件平台："></a>一些相关的软件平台：</h2><p>CesiumLab<br>Mars3D</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://kw1649190133.github.io/2022/05/30/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F3Dtiles%E5%92%8Cosgb%E7%9A%84%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3Dtiles/" rel="tag">3Dtiles</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cusium/" rel="tag">Cusium</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/osgb/" rel="tag">osgb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/" rel="tag">数据格式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2022/08/29/%E5%9C%A8markdown%E6%96%87%E6%A1%A3%E4%B8%AD%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E7%9A%84%E6%96%B9%E5%BC%8F/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            在markdown文档中插入图片的方式
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/05/26/hexo%E5%8D%87%E7%BA%A7%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%95%B4%E7%90%86/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">hexo升级与环境整理</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020-2022
+        Kwindy
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="kw&#39;s blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+      
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['千里之行,止于足下','万事开头难,后面会更难','世上无难事,只要肯放弃'],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-koharu"},"display":{"position":"right","width":200,"height":350},"mobile":{"show":true,"scale":0.5},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
