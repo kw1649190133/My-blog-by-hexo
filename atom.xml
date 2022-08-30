@@ -6,7 +6,7 @@
   <link href="http://kw1649190133.github.io/atom.xml" rel="self"/>
   
   <link href="http://kw1649190133.github.io/"/>
-  <updated>2022-08-29T08:00:49.103Z</updated>
+  <updated>2022-08-30T01:02:54.646Z</updated>
   <id>http://kw1649190133.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ArcGIS入门</title>
+    <link href="http://kw1649190133.github.io/2022/08/30/ArcGIS%E5%85%A5%E9%97%A8/"/>
+    <id>http://kw1649190133.github.io/2022/08/30/ArcGIS%E5%85%A5%E9%97%A8/</id>
+    <published>2022-08-30T00:54:08.000Z</published>
+    <updated>2022-08-30T01:02:54.646Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Arcgis安装&quot;&gt;&lt;a href=&quot;#Arcgis安装&quot; class=&quot;headerlink&quot; title=&quot;Arcgis安装&quot;&gt;&lt;/a&gt;Arcgis安装&lt;/h2&gt;&lt;p&gt;桌面端主程序 ArcGIS_Desktop&lt;br&gt;许可程序</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>在markdown文档中插入图片的方式</title>
