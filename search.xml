@@ -13,8 +13,14 @@
 <h4 id="创建Shapefile文件"><a href="#创建Shapefile文件" class="headerlink" title="创建Shapefile文件"></a>创建Shapefile文件</h4><p>Shapefile文件类似于CAD中的一个图层，它只可以储存同一类型（点、线、面等）的数据文件，如学校布点、道路或行政区划<br>在【目录】-【文件夹连接】中，右键点击我们的目标文件夹，选择【新建】-【Shapefile】</p>
 <h4 id="创建Geodatabase文件"><a href="#创建Geodatabase文件" class="headerlink" title="创建Geodatabase文件"></a>创建Geodatabase文件</h4><p>与“Shapefile”文件只能储存单一属性数据不同的是，Geodatabase是按照一定的模型和规则组合起来的储存空间数据和属性的数据合集。它的优势在于不同类型数据的整合和整体移动的便捷。【Geodatabase】的子集为【要素数据集】，【要素数据集】的子集为【要素类】。相当于一个文件夹，包含多个shapefile和表。<br>在【目录】-【文件夹连接】中，右键单击【现状道路】，选择【新建】-【个人地理数据库】</p>
 <h2 id="常用工具"><a href="#常用工具" class="headerlink" title="常用工具"></a>常用工具</h2><h4 id="编辑器"><a href="#编辑器" class="headerlink" title="编辑器"></a>编辑器</h4><p>选择、跟踪、折点编辑、整形、分割、属性框、创建要素。<br>粘滞移动容差设置。</p>
-<h4 id="字段计算器"><a href="#字段计算器" class="headerlink" title="字段计算器"></a>字段计算器</h4><p>用于在编辑字段内容时进行批量赋值</p>
-<h4 id="文件管理器"><a href="#文件管理器" class="headerlink" title="文件管理器"></a>文件管理器</h4><p>创建矢量数据、数据库，查看数据库中的内容</p>
+<h4 id="字段计算器"><a href="#字段计算器" class="headerlink" title="字段计算器"></a>字段计算器</h4><p>用于在编辑字段内容时进行批量赋值。<br>例如常用的<strong>按顺序编号</strong>，可以用python实现。在代码块中定义函数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rec=0</span><br><span class="line">def autoIncrement():</span><br><span class="line">	global rec</span><br><span class="line">	pStart=1#初始值</span><br><span class="line">	pInterval=1#间隔值</span><br><span class="line">	if(rec==0):</span><br><span class="line">		rec=pStart</span><br><span class="line">	else:</span><br><span class="line">		rec=rec+pInterval</span><br><span class="line">	return rec</span><br></pre></td></tr></table></figure>
+<p>在赋值区用运行函数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">autoIncrement()</span><br></pre></td></tr></table></figure>
+<h4 id="属性查询器"><a href="#属性查询器" class="headerlink" title="属性查询器"></a>属性查询器</h4><p>使用属性查询器对要素进行属性筛选，例如</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DLTB LIKE &#x27;03%&#x27;</span><br></pre></td></tr></table></figure>
+<p>需要了解SQL、以及基本的通配字符。例如<br>【<code>%</code>】表示0个或多个字符</p>
+<h4 id="文件管理器"><a href="#文件管理器" class="headerlink" title="文件管理器"></a>文件管理器</h4><p>创建矢量数据、数据库，查看数据库中的内容，对数据库进行修改。</p>
 <h4 id="工具箱"><a href="#工具箱" class="headerlink" title="工具箱"></a>工具箱</h4><p>分析工具-叠加分析<br>数据管理工具-常规-合并<br>投影和变化-定义投影、投影<br>缓冲区、数据驱动<br>转换工具Dwg、shp、kml</p>
 <h4 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h4><p>方便快捷的找到相应的工具</p>
 ]]></content>
