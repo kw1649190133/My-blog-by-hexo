@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>SQL学习(一)</title>
+    <url>/2022/08/30/SQL%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>虽然以前上学的时候上了数据库的课程，但是很遗憾并没有学的很好。如今工作后时长和数据库打交道，所以在W3school中复习一下SQL。</p>
+<h2 id="SQL是什么"><a href="#SQL是什么" class="headerlink" title="SQL是什么"></a>SQL是什么</h2><p>SQL 是一门 ANSI 的标准计算机语言，用来访问和操作数据库系统。但是不同版本的SQL库除了重要关键词一样之外，还会有自己的私有扩张库。</p>
+<h2 id="SQL-DML和DDL"><a href="#SQL-DML和DDL" class="headerlink" title="SQL DML和DDL"></a>SQL DML和DDL</h2><ul>
+<li>DML 数据操作语言，</li>
+<li>DDL 数据定义语言，创建、删除表格，定义索引（键），规定表之间的链接，以及施加表之间的约束。</li>
+</ul>
+<h2 id="重要事项"><a href="#重要事项" class="headerlink" title="重要事项"></a>重要事项</h2><ol>
+<li>SQL对大小写不敏感</li>
+<li>如果使用的是 MS Access 和 SQL Server 2000，则不必在每条 SQL 语句之后使用分号，不过某些数据库软件要求必须使用分号。根据实际情况使用。</li>
+</ol>
+<h3 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h3><p>基本语法：<br><code>select 列名称 from 表名称</code><br>以及用*获取所以列：<br><code>select * from 表名称</code><br>获取多个列时：<br><code>select 列名称1,列名称2 from 表名称</code></p>
+<h3 id="DISTINCT"><a href="#DISTINCT" class="headerlink" title="DISTINCT"></a>DISTINCT</h3><p>distinct用于筛选出把不同的值，相同的列只显示一次。<br>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT DISTINCT 列名称 FROM 表名称</span><br></pre></td></tr></table></figure>
+
+<h3 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h3><p>where语句的基本语法如下：<br><code>SELECT 列名称 FROM 表名称 WHERE 列 运算符 值</code></p>
+<p>可以在where中使用的运算符有：<br>= 等于（某些版本也写作<code>!=</code>）<br>&lt;&gt; 不等于<br>&gt; 大于<br>&lt; 小于<br>&gt;&#x3D; 大于等于<br>&lt;&#x3D; 小于等于<br>BETWEEN 在某个范围内<br>LIKE 搜索某种模式</p>
+<h4 id="引号的使用"><a href="#引号的使用" class="headerlink" title="引号的使用"></a>引号的使用</h4><p>请注意，我们在例子中的条件值周围使用的是单引号。<br>SQL 使用单引号来环绕<strong>文本值</strong>（大部分数据库系统也接受双引号）。如果是<strong>数值</strong>，请不要使用引号。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>ArcGIS入门</title>
     <url>/2022/08/30/ArcGIS%E5%85%A5%E9%97%A8/</url>
     <content><![CDATA[<h2 id="Arcgis安装"><a href="#Arcgis安装" class="headerlink" title="Arcgis安装"></a>Arcgis安装</h2><p>桌面端主程序 ArcGIS_Desktop<br>许可程序 License_Manager<br>破解，可使用注册机或替换文件。</p>
@@ -24,6 +46,12 @@
 <h4 id="工具箱"><a href="#工具箱" class="headerlink" title="工具箱"></a>工具箱</h4><p>分析工具-叠加分析<br>数据管理工具-常规-合并<br>投影和变化-定义投影、投影<br>缓冲区、数据驱动<br>转换工具Dwg、shp、kml</p>
 <h4 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h4><p>方便快捷的找到相应的工具</p>
 ]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>Arcgis</tag>
+      </tags>
   </entry>
   <entry>
     <title>在markdown文档中插入图片的方式</title>
@@ -48,6 +76,13 @@
 <p>之后就可以在使用<code>![](image.jpg)</code>的方式愉快的插入图片了。</p>
 <h3 id="图片上传测试"><a href="#图片上传测试" class="headerlink" title="图片上传测试"></a>图片上传测试</h3><p><img src="/2022/08/29/%E5%9C%A8markdown%E6%96%87%E6%A1%A3%E4%B8%AD%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E7%9A%84%E6%96%B9%E5%BC%8F/%E5%85%AB%E9%87%8D%E6%A8%B1%E5%A3%81%E7%BA%B82.png" alt="八重樱壁纸"></p>
 ]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>图片</tag>
+      </tags>
   </entry>
   <entry>
     <title>数据格式3Dtiles和osgb的学习</title>
