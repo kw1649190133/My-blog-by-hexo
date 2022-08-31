@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>关于Repository_No_Found的问题</title>
+    <url>/2022/08/31/%E5%85%B3%E4%BA%8ERepository_No_Found%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>今天进行<code>hexo d</code>的时候，出现了新的问题，提示<br><code>repository 我的仓库地址 no Found</code><br>尝试在网上寻找解决办法，一番研究后查明，是登录信息有问题。但是不应该啊，最近也没有修改过账号和密码，也没有动过密钥和令牌。<br>然后看到有大佬说，是windows的凭据管理器，自动填写了其他的账号和密码进去。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>打开<code>控制面板\用户帐户\凭据管理器</code>，选择windows保管库，然后找到自己的github仓库的账号和密码，重新编辑一下，输入正确的密码，然后保存，就恢复正常了。</p>
+<p>PS:最近还遇到了无法上传的问题，折腾了半天也没解决，最后才发现是网络问题，github大概被墙了，用steam++加速一下就搞定了。也许这就是久病成医吧。</p>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>github</tag>
+        <tag>凭据问题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SQL学习(一)</title>
     <url>/2022/08/30/SQL%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>虽然以前上学的时候上了数据库的课程，但是很遗憾并没有学的很好。如今工作后时常和数据库打交道，所以在W3school中复习一下SQL。</p>
@@ -18,7 +34,7 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT DISTINCT 列名称 FROM 表名称</span><br></pre></td></tr></table></figure>
 
 <h3 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h3><p>where语句的基本语法如下：<br><code>SELECT 列名称 FROM 表名称 WHERE 列 运算符 值</code><br>示例：<br><code>SELECT * FROM Persons WHERE City=&#39;Beijing&#39;</code></p>
-<p>可以在where中使用的运算符有：<br>= 等于（某些版本也写作<code>!=</code>）<br>&lt;&gt; 不等于<br>&gt; 大于<br>&lt; 小于<br>&gt;&#x3D; 大于等于<br>&lt;&#x3D; 小于等于<br>BETWEEN 在某个范围内<br>LIKE 搜索某种模式</p>
+<p>可以在where中使用的运算符有：<br>&#x3D; 等于（某些版本也写作<code>!=</code>）<br>&lt;&gt; 不等于<br>&gt; 大于<br>&lt; 小于<br>&gt;&#x3D; 大于等于<br>&lt;&#x3D; 小于等于<br>BETWEEN 在某个范围内<br>LIKE 搜索某种模式</p>
 <h4 id="引号的使用"><a href="#引号的使用" class="headerlink" title="引号的使用"></a>引号的使用</h4><p>请注意，我们在例子中的条件值周围使用的是单引号。<br>SQL 使用单引号来环绕<strong>文本值</strong>（大部分数据库系统也接受双引号）。如果是<strong>数值</strong>，请不要使用引号。</p>
 ]]></content>
       <categories>
