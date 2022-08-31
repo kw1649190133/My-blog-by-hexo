@@ -4,7 +4,7 @@
     <title>关于Repository_No_Found的问题</title>
     <url>/2022/08/31/%E5%85%B3%E4%BA%8ERepository_No_Found%E7%9A%84%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>今天进行<code>hexo d</code>的时候，出现了新的问题，提示<br><code>repository 我的仓库地址 no Found</code><br>尝试在网上寻找解决办法，一番研究后查明，是登录信息有问题。但是不应该啊，最近也没有修改过账号和密码，也没有动过密钥和令牌。<br>然后看到有大佬说，是windows的凭据管理器，自动填写了其他的账号和密码进去。</p>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>打开<code>控制面板\用户帐户\凭据管理器</code>，选择windows保管库，然后找到自己的github仓库的账号和密码，重新编辑一下，输入正确的密码，然后保存，就恢复正常了。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>打开<code>控制面板\用户帐户\凭据管理器</code>，选择windows保管库，然后找到自己的github仓库的账号和密码，重新编辑一下，输入正确的密码，然后保存，就恢复正常了。<br>再次使用仓库时，会提示重新登录或者重新输入令牌。</p>
 <p>PS:最近还遇到了无法上传的问题，折腾了半天也没解决，最后才发现是网络问题，github大概被墙了，用steam++加速一下就搞定了。也许这就是久病成医吧。</p>
 ]]></content>
       <categories>
@@ -29,13 +29,16 @@
 <li>SQL对大小写不敏感</li>
 <li>如果使用的是 MS Access 和 SQL Server 2000，则不必在每条 SQL 语句之后使用分号，不过某些数据库软件要求必须使用分号。根据实际情况使用。</li>
 </ol>
-<h3 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h3><p>基本语法：<br><code>select 列名称 from 表名称</code><br>以及用*获取所以列：<br><code>select * from 表名称</code><br>获取多个列时：<br><code>select 列名称1,列名称2 from 表名称</code></p>
-<h3 id="DISTINCT"><a href="#DISTINCT" class="headerlink" title="DISTINCT"></a>DISTINCT</h3><p>distinct用于筛选出把不同的值，相同的列只显示一次。<br>语法：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT DISTINCT 列名称 FROM 表名称</span><br></pre></td></tr></table></figure>
-
-<h3 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h3><p>where语句的基本语法如下：<br><code>SELECT 列名称 FROM 表名称 WHERE 列 运算符 值</code><br>示例：<br><code>SELECT * FROM Persons WHERE City=&#39;Beijing&#39;</code></p>
+<h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><h3 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h3><p>筛选结果包含的列<br>基本语法：<br><code>select 列名称 from 表名称</code><br>以及用*获取所以列：<br><code>select * from 表名称</code><br>获取多个列时：<br><code>select 列名称1,列名称2 from 表名称</code></p>
+<h3 id="DISTINCT"><a href="#DISTINCT" class="headerlink" title="DISTINCT"></a>DISTINCT</h3><p>distinct用于筛选出把不同的值，相同的列但不同行只显示一次，相当于一次汇总统计。<br>语法：<br><code>SELECT DISTINCT 列名称 FROM 表名称</code></p>
+<h3 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h3><p>引出筛选条件的语句<br>where语句的基本语法如下：<br><code>SELECT 列名称 FROM 表名称 WHERE 列 运算符 值</code><br>示例：<br><code>SELECT * FROM Persons WHERE City=&#39;Beijing&#39;</code></p>
 <p>可以在where中使用的运算符有：<br>&#x3D; 等于（某些版本也写作<code>!=</code>）<br>&lt;&gt; 不等于<br>&gt; 大于<br>&lt; 小于<br>&gt;&#x3D; 大于等于<br>&lt;&#x3D; 小于等于<br>BETWEEN 在某个范围内<br>LIKE 搜索某种模式</p>
 <h4 id="引号的使用"><a href="#引号的使用" class="headerlink" title="引号的使用"></a>引号的使用</h4><p>请注意，我们在例子中的条件值周围使用的是单引号。<br>SQL 使用单引号来环绕<strong>文本值</strong>（大部分数据库系统也接受双引号）。如果是<strong>数值</strong>，请不要使用引号。</p>
+<h3 id="AND-和-OR"><a href="#AND-和-OR" class="headerlink" title="AND 和 OR"></a>AND 和 OR</h3><p>与和或的逻辑，或者说交集和并集，平时用的也非常多了。<br>二者结合的示例：<br><code>SELECT * FROM Persons WHERE (FirstName=&#39;Thomas&#39; OR FirstName=&#39;William&#39;)AND LastName=&#39;Carter&#39;</code><br>为了防止逻辑的混乱，要适当的使用圆括号进行分割。</p>
+<h3 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h3><p>语法示例：<br><code>ORDER BY 列名称 ASC</code><br>语句根据指定列对结果进行升序排序。因为默认是升序，所以ASC一般可以省略。如果需要按降序排序，在指定列的后面加上关键字<code>DESC</code>。<br>但是如果按照多个字段进行排序时，还是要把ASC加上。<br>示例：<br><code>SELECT 字段一, 字段二 FROM 表名 ORDER BY 字段一 DESC, 字段二 ASC</code></p>
+<h3 id="INSERT-INTO"><a href="#INSERT-INTO" class="headerlink" title="INSERT INTO"></a>INSERT INTO</h3><p>该语句用于向表格中插入新的行。<br>语法示例：<br><code>INSERT INTO 表名称 VALUES (值1, 值2,....)</code><br>也可以指定单独插入数据的列，这样的话没有插入数据的列就会被空着。<br><code>INSERT INTO table_name (列1, 列2,...) VALUES (值1, 值2,....)</code></p>
+<h3 id="UPDATA"><a href="#UPDATA" class="headerlink" title="UPDATA"></a>UPDATA</h3><p>该语句用于修改表格中的数据<br>语法示例：<br><code>UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值</code><br>更新某一行中的若干列：<br><code>UPDATE Person SET Address = &#39;Zhongshan 23&#39;, City = &#39;Nanjing&#39; WHERE LastName = &#39;Wilson&#39;</code></p>
+<h3 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h3><p>该语句用于删除表中的行。<br>语法示例：删除某个条件下的记录<br><code>DELETE FROM 表名称 WHERE 列名称 = 值</code><br>在不删除表的情况下删除所有行（表的结构、属性和索引都是完整的）<br><code>DELETE * FROM table_name</code><br>其中<code>*</code>是可以省略的。</p>
 ]]></content>
       <categories>
         <category>学习</category>
