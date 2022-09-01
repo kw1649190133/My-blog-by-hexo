@@ -66,6 +66,92 @@
     
     
     
+    <article id="post-在网页上加入live2D人偶" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/02/14/%E5%9C%A8%E7%BD%91%E9%A1%B5%E4%B8%8A%E5%8A%A0%E5%85%A5live2D%E4%BA%BA%E5%81%B6/"
+    >在网页上加入live2D人偶</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/02/14/%E5%9C%A8%E7%BD%91%E9%A1%B5%E4%B8%8A%E5%8A%A0%E5%85%A5live2D%E4%BA%BA%E5%81%B6/" class="article-date">
+  <time datetime="2020-02-14T11:01:54.000Z" itemprop="datePublished">2020-02-14</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p>明明是前几天才刚搭好博客，搞好主题，又忍不住要下手搞点新东西了。</p>
+<p>博客页面只有图片和文字，未免有些太枯燥乏味，于是就想加入一个桌面宠物。</p>
+<h2 id="1-安装live-2d插件"><a href="#1-安装live-2d插件" class="headerlink" title="1. 安装live 2d插件"></a>1. 安装live 2d插件</h2><p>在hexo的目录下，输入指令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
+
+<p>安装live2D的网页显示插件。</p>
+<p>指令结束后，会发现博客目录中多了一个几十MB大小的node_modules文件夹</p>
+<h2 id="2-下载模板"><a href="#2-下载模板" class="headerlink" title="2.下载模板"></a>2.下载模板</h2><p>github仓库链接: <a target="_blank" rel="noopener" href="https://github.com/kw1649190133/live2d-widget-models">https://github.com/kw1649190133/live2d-widget-models</a></p>
+<p>模型包中包括二十余个模型，选一个自己喜欢的丢进node_modules文件夹中即可。</p>
+<h2 id="3-在配置文件中加入设定"><a href="#3-在配置文件中加入设定" class="headerlink" title="3.在配置文件中加入设定"></a>3.在配置文件中加入设定</h2><p>打开根目录下的配置文件_config.yml ，插入以下内容：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  pluginModelPath: assets/</span><br><span class="line">  tagMode: false # 标签模式, 是否仅替换 live2d tag标签而非插入到所有页面中</span><br><span class="line">  debug: false # 调试, 是否在控制台输出日志</span><br><span class="line">  model:</span><br><span class="line">    use: live2d-widget-model-koharu  #模板目录，在node_modules里</span><br><span class="line">  display:</span><br><span class="line">    position: right</span><br><span class="line">    width: 200 </span><br><span class="line">    height: 350</span><br><span class="line">  mobile:</span><br><span class="line">    show: true  #是否在手机进行显示</span><br><span class="line">    scale: 0.4 # 移动设备上的缩放比例</span><br></pre></td></tr></table></figure>
+
+
+
+<p>至此live2D配置完成，保存后刷新页面，即可显示。</p>
+<p>关于live2D插件的更多细节问题可以到官方资料站查询</p>
+<p><a target="_blank" rel="noopener" href="https://l2dwidget.js.org/docs/function/index.html#static-function-config">https://l2dwidget.js.org/docs/function/index.html#static-function-config</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/live2D/" rel="tag">live2D</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-hexo文档编写基本操作" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
