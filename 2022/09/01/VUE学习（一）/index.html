@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    关于Repository_No_Found的问题 |  kw&#39;s blog
+    VUE学习（一） |  kw&#39;s blog
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -32,7 +32,7 @@
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-关于Repository_No_Found的问题" class="article article-type-post" itemscope
+  <article id="post-VUE学习（一）" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -40,7 +40,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  关于Repository_No_Found的问题
+  VUE学习（一）
 </h1>
   
 
@@ -49,8 +49,8 @@
 
     
     <div class="article-meta">
-      <a href="/2022/08/31/%E5%85%B3%E4%BA%8ERepository_No_Found%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
-  <time datetime="2022-08-31T02:32:51.000Z" itemprop="datePublished">2022-08-31</time>
+      <a href="/2022/09/01/VUE%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" class="article-date">
+  <time datetime="2022-09-01T04:04:40.000Z" itemprop="datePublished">2022-09-01</time>
 </a>
       
   <div class="article-category">
@@ -64,7 +64,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">262字</span>
+            <span class="post-count">634字</span>
         </span>
     </span>
 
@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1分钟</span>
+            <span class="post-count">2分钟</span>
         </span>
     </span>
 </div>
@@ -99,10 +99,14 @@
       
 
       
-      <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>今天进行<code>hexo d</code>的时候，出现了新的问题，提示<br><code>repository 我的仓库地址 no Found</code><br>尝试在网上寻找解决办法，一番研究后查明，是登录信息有问题。但是不应该啊，最近也没有修改过账号和密码，也没有动过密钥和令牌。<br>然后看到有大佬说，是windows的凭据管理器，自动填写了其他的账号和密码进去。</p>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>打开<code>控制面板\用户帐户\凭据管理器</code>，选择windows保管库，然后找到自己的github仓库的账号和密码，重新编辑一下，输入正确的密码，然后保存，就恢复正常了。<br>再次使用仓库时，会提示重新登录或者重新输入令牌。</p>
-<p>PS:最近还遇到了无法上传的问题，折腾了半天也没解决，最后才发现是网络问题，github大概被墙了，用steam++加速一下就搞定了。也许这就是久病成医吧。</p>
-
+      <h2 id="VUE基础"><a href="#VUE基础" class="headerlink" title="VUE基础"></a>VUE基础</h2><p>Vue.js是一套构建用户界面的渐进式框架。<br>只关注图层，采用自底向上的开发设计。<br>所需要的知识基础：<strong>HTML</strong>,<strong>CSS</strong>,<strong>JavaScript</strong></p>
+<h2 id="安装和运行过程"><a href="#安装和运行过程" class="headerlink" title="安装和运行过程"></a>安装和运行过程</h2><p>使用npm（或cnpm）安装稳定版的vue<br><code>cnpm install vue@next</code><br>升级一下@vue&#x2F;cli<br><code>cnpm install -g @vue/cli</code><br>在Vue项目中运行（应该是组件升级用的）<br><code>vue upgrade --next</code><br>进入项目文件夹，安装并运行dev<br><code>cd runoob-vue3-test cnpm run dev</code><br>然后就会给一个端口<code>http://localhost:8080/</code>，直接进浏览器打开<br>运行成功后的画面：<br>!(运行成功画面)[vue运行截图1.png]</p>
+<h2 id="安装过程中遇到的问题"><a href="#安装过程中遇到的问题" class="headerlink" title="安装过程中遇到的问题"></a>安装过程中遇到的问题</h2><p>出师不利，一上来就遇到了问题<br><code> vue-cli · Failed to download repo vuejs-templates/webpack: unable to verify the first certificate</code></p>
+<p>关闭了steam++的加速后，不会直接报网络错误了，但是显示下载后，又会卡很长一段时间然后依旧报错。换了淘宝源之后，依旧不行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">downloading template</span><br><span class="line">vue-cli · Failed to download repo vuejs-templates/webpack: connect ETIMEDOUT 52.192.72.89:443</span><br></pre></td></tr></table></figure>
+<p>大概率还是网络的问题，换源并没有用，只能用手动下载离线部署的方式解决。<br>去到git仓库手动下载webpack模块<a target="_blank" rel="noopener" href="https://github.com/vuejs-templates/webpack">https://github.com/vuejs-templates/webpack</a><br>下载后是一个压缩包<strong>webpack-develop.zip</strong>，需要解压后把文件夹名称改为<strong>webpack</strong>然后放到<code>C:\Users\用户名\.vue-templates</code>路径下，也就是<code>C:\Users\用户名\.vue-templates\webpack</code>。<br>（如果是初次安装这个.vue-templates文件夹是没有的，要自己建）</p>
+<p>然后就可以运行vue创建项目了，但是要使用<code>--offline</code><br><code>vue init webpack --offline runoobvue3</code>(最后的是项目名称)<br>如果没有放对位置，就会出现<br><code>vue-cli · Local template &quot;C:\Users\用户名\.vue-templates\webpack&quot; not found</code><br>根据提示的地址，放到对应的位置就好，毕竟问题总是千奇百怪，一个方法不一定能解决所有问题。<br>大概是因为vue里面把这个安装路径给写死了，所以只能放在这里。后续有机会再研究这个路径的问题。<br>一顿操作以后，终于看到了创建成功的提示出现，总算是没白忙活</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt; Use cached template at ~\.vue-templates\webpack</span><br><span class="line"></span><br><span class="line">? Project name runoobvue3</span><br><span class="line">? Project description A Vue.js project</span><br><span class="line">? Author &#x27;kw344456731&#x27; &lt;1649190133@qq.com&gt;</span><br><span class="line">? Vue build standalone</span><br><span class="line">? Install vue-router? Yes</span><br><span class="line">? Use ESLint to lint your code? Yes</span><br><span class="line">? Pick an ESLint preset Standard</span><br><span class="line">? Set up unit tests Yes</span><br><span class="line">? Pick a test runner jest</span><br><span class="line">? Setup e2e tests with Nightwatch? Yes</span><br><span class="line">? Should we run `npm install` for you after the project has been created? (recom</span><br><span class="line">mended) npm</span><br><span class="line"></span><br><span class="line">   vue-cli · Generated &quot;runoobvue3&quot;.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Installing project dependencies ...</span><br><span class="line"># ========================</span><br></pre></td></tr></table></figure>
       
       <!-- reward -->
       
@@ -154,14 +158,14 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://kw1649190133.github.io/2022/08/31/%E5%85%B3%E4%BA%8ERepository_No_Found%E7%9A%84%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://kw1649190133.github.io/2022/09/01/VUE%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%87%AD%E6%8D%AE%E9%97%AE%E9%A2%98/" rel="tag">凭据问题</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li></ul>
 
 
     </footer>
@@ -172,19 +176,10 @@
   
   <nav class="article-nav">
     
-      <a href="/2022/09/01/VUE%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            VUE学习（一）
-          
-        </div>
-      </a>
     
-    
-      <a href="/2022/08/30/SQL%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" class="article-nav-link">
+      <a href="/2022/08/31/%E5%85%B3%E4%BA%8ERepository_No_Found%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">SQL学习(一)</div>
+        <div class="article-nav-title">关于Repository_No_Found的问题</div>
       </a>
     
   </nav>

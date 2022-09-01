@@ -66,6 +66,82 @@
     
     
     
+    <article id="post-VUE学习（一）" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/09/01/VUE%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/"
+    >VUE学习（一）</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/09/01/VUE%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" class="article-date">
+  <time datetime="2022-09-01T04:04:40.000Z" itemprop="datePublished">2022-09-01</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="VUE基础"><a href="#VUE基础" class="headerlink" title="VUE基础"></a>VUE基础</h2><p>Vue.js是一套构建用户界面的渐进式框架。<br>只关注图层，采用自底向上的开发设计。<br>所需要的知识基础：<strong>HTML</strong>,<strong>CSS</strong>,<strong>JavaScript</strong></p>
+<h2 id="安装和运行过程"><a href="#安装和运行过程" class="headerlink" title="安装和运行过程"></a>安装和运行过程</h2><p>使用npm（或cnpm）安装稳定版的vue<br><code>cnpm install vue@next</code><br>升级一下@vue&#x2F;cli<br><code>cnpm install -g @vue/cli</code><br>在Vue项目中运行（应该是组件升级用的）<br><code>vue upgrade --next</code><br>进入项目文件夹，安装并运行dev<br><code>cd runoob-vue3-test cnpm run dev</code><br>然后就会给一个端口<code>http://localhost:8080/</code>，直接进浏览器打开<br>运行成功后的画面：<br>!(运行成功画面)[vue运行截图1.png]</p>
+<h2 id="安装过程中遇到的问题"><a href="#安装过程中遇到的问题" class="headerlink" title="安装过程中遇到的问题"></a>安装过程中遇到的问题</h2><p>出师不利，一上来就遇到了问题<br><code> vue-cli · Failed to download repo vuejs-templates/webpack: unable to verify the first certificate</code></p>
+<p>关闭了steam++的加速后，不会直接报网络错误了，但是显示下载后，又会卡很长一段时间然后依旧报错。换了淘宝源之后，依旧不行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">downloading template</span><br><span class="line">vue-cli · Failed to download repo vuejs-templates/webpack: connect ETIMEDOUT 52.192.72.89:443</span><br></pre></td></tr></table></figure>
+<p>大概率还是网络的问题，换源并没有用，只能用手动下载离线部署的方式解决。<br>去到git仓库手动下载webpack模块<a target="_blank" rel="noopener" href="https://github.com/vuejs-templates/webpack">https://github.com/vuejs-templates/webpack</a><br>下载后是一个压缩包<strong>webpack-develop.zip</strong>，需要解压后把文件夹名称改为<strong>webpack</strong>然后放到<code>C:\Users\用户名\.vue-templates</code>路径下，也就是<code>C:\Users\用户名\.vue-templates\webpack</code>。<br>（如果是初次安装这个.vue-templates文件夹是没有的，要自己建）</p>
+<p>然后就可以运行vue创建项目了，但是要使用<code>--offline</code><br><code>vue init webpack --offline runoobvue3</code>(最后的是项目名称)<br>如果没有放对位置，就会出现<br><code>vue-cli · Local template &quot;C:\Users\用户名\.vue-templates\webpack&quot; not found</code><br>根据提示的地址，放到对应的位置就好，毕竟问题总是千奇百怪，一个方法不一定能解决所有问题。<br>大概是因为vue里面把这个安装路径给写死了，所以只能放在这里。后续有机会再研究这个路径的问题。<br>一顿操作以后，终于看到了创建成功的提示出现，总算是没白忙活</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt; Use cached template at ~\.vue-templates\webpack</span><br><span class="line"></span><br><span class="line">? Project name runoobvue3</span><br><span class="line">? Project description A Vue.js project</span><br><span class="line">? Author &#x27;kw344456731&#x27; &lt;1649190133@qq.com&gt;</span><br><span class="line">? Vue build standalone</span><br><span class="line">? Install vue-router? Yes</span><br><span class="line">? Use ESLint to lint your code? Yes</span><br><span class="line">? Pick an ESLint preset Standard</span><br><span class="line">? Set up unit tests Yes</span><br><span class="line">? Pick a test runner jest</span><br><span class="line">? Setup e2e tests with Nightwatch? Yes</span><br><span class="line">? Should we run `npm install` for you after the project has been created? (recom</span><br><span class="line">mended) npm</span><br><span class="line"></span><br><span class="line">   vue-cli · Generated &quot;runoobvue3&quot;.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Installing project dependencies ...</span><br><span class="line"># ========================</span><br></pre></td></tr></table></figure>
+      
+      <!-- reward -->
+      
+    </div>
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-关于Repository_No_Found的问题" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -827,88 +903,6 @@
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/live2D/" rel="tag">live2D</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-hexo文档编写基本操作" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/02/12/hexo%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"
-    >hexo文档编写基本操作</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/02/12/hexo%E6%96%87%E6%A1%A3%E7%BC%96%E5%86%99%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" class="article-date">
-  <time datetime="2020-02-12T10:50:14.000Z" itemprop="datePublished">2020-02-12</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="1-分级标题"><a href="#1-分级标题" class="headerlink" title="1. 分级标题"></a>1. 分级标题</h2><p>行首加 “#” 表示不同级别的标题 (H1-H6)。“#” 后最好空一格。H1最大，H6最小。并且目录的自动生成也是按照标题来嵌套的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br></pre></td></tr></table></figure>
-<h2 id="2-文字强调"><a href="#2-文字强调" class="headerlink" title="2. 文字强调"></a>2. 文字强调</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*内容*---斜体文字</span><br><span class="line">**内容**---加粗文字</span><br><span class="line">***内容***---粗斜体文字</span><br></pre></td></tr></table></figure>
-<h2 id="3-列表"><a href="#3-列表" class="headerlink" title="3. 列表"></a>3. 列表</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">*+-表示无序列表。</span><br><span class="line"></span><br><span class="line">* 测试0</span><br><span class="line">* 测试1</span><br><span class="line">* 测试2</span><br><span class="line">+ 测试3</span><br><span class="line">+ 测试4</span><br><span class="line">+ 测试5</span><br><span class="line">- 测试6</span><br><span class="line">- 测试7</span><br><span class="line">- 测试8</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">数字和点1.2.3.表示有序列表。字符后须空一格。</span><br><span class="line"></span><br><span class="line">1. 测试1</span><br><span class="line">2. 测试2</span><br><span class="line">3. 测试3</span><br><span class="line">4. 测试4</span><br><span class="line">5. 测试5</span><br></pre></td></tr></table></figure>
-<h2 id="4-引用"><a href="#4-引用" class="headerlink" title="4. 引用"></a>4. 引用</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;引用  </span><br><span class="line">&gt;&gt; 引用中引用</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-文本居中的引用"><a href="#5-文本居中的引用" class="headerlink" title="5. 文本居中的引用"></a>5. 文本居中的引用</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% cq %&#125; </span><br><span class="line">文本居中的引用</span><br><span class="line">测试</span><br><span class="line">测试2  </span><br><span class="line">&#123;% endcq %&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="6-分割线"><a href="#6-分割线" class="headerlink" title="6. 分割线"></a>6. 分割线</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">***</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<h2 id="7-删除线和下划线"><a href="#7-删除线和下划线" class="headerlink" title="7. 删除线和下划线"></a>7. 删除线和下划线</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~~内容~~---删除线</span><br><span class="line">&lt;u&gt;内容&lt;/u&gt;---下划线</span><br></pre></td></tr></table></figure>
-<h2 id="8-行内代码"><a href="#8-行内代码" class="headerlink" title="8. 行内代码"></a>8. 行内代码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`内容`</span><br></pre></td></tr></table></figure>
-<h2 id="9-代码块"><a href="#9-代码块" class="headerlink" title="9. 代码块"></a>9. 代码块</h2><p>文字上下方直接加 ``` 即可</p>
-
-      
-      <!-- reward -->
-      
-    </div>
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
 
 
     </footer>
