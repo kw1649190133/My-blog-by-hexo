@@ -64,7 +64,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">192字</span>
+            <span class="post-count">634字</span>
         </span>
     </span>
 
@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1分钟</span>
+            <span class="post-count">2分钟</span>
         </span>
     </span>
 </div>
@@ -99,10 +99,61 @@
       
 
       
-      <h2 id="关于网页构成和代码注入"><a href="#关于网页构成和代码注入" class="headerlink" title="关于网页构成和代码注入"></a>关于网页构成和代码注入</h2><p>打开网站的入口文件index.html，发现body里面明明什么都没有，只有一条备注，但运行dev的时候却能看到一个初始化界面。这条备注的信息，说的就是生成的文件将自动注入，这里实际上是通过插件实现的。</p>
+      <p><strong>本章节主要对一些零散知识的整理，下一章节开始项目代码的构建</strong></p>
+<h2 id="关于网页构成和代码注入"><a href="#关于网页构成和代码注入" class="headerlink" title="关于网页构成和代码注入"></a>关于网页构成和代码注入</h2><p>打开网站的入口文件index.html，发现body里面明明什么都没有，只有一条备注，但运行dev的时候却能看到一个初始化界面。这条备注的信息，说的就是生成的文件将自动注入，这里实际上是通过插件实现的。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</span><br><span class="line">   &lt;!-- built files will be auto injected --&gt;</span><br></pre></td></tr></table></figure>
 <p>在dev启动的页面中，用浏览器F12查看代码，会发现多了一行，就是注入文件的路径，也就是我们要写代码的地方了。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;!-- built files will be auto injected --&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot; src=&quot;/app.js&quot;&gt;&lt;/script&gt;`</span><br></pre></td></tr></table></figure>
+
+<h2 id="项目打包"><a href="#项目打包" class="headerlink" title="项目打包"></a>项目打包</h2><p>项目打包使用指令<code>cnpm run build</code>实现项目的打包，打包完成后会在Vue项目下面生成一个<code>dist</code>目录，包含了index.html和static目录，static目录包含静态文件js、css以及图片目录images（如果有的话）</p>
+<p><img src="/2022/09/01/VUE%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/%E6%89%93%E5%8C%85%E5%AE%8C%E6%88%90%E7%94%BB%E9%9D%A21.png" alt="打包完成画面"></p>
+<p>打包完成后，理论上就可以直接部署在其他地方了。但是双击index.html会打不开网页，因为里面的路径是绝对路径。需要修改成相对路径。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;link href=/static/css/app.33da80d69744798940b135da93bc7b98.css rel=stylesheet&gt;</span><br><span class="line">&lt;script type=text/javascript src=/static/js/app.717bb358ddc19e181140.js&gt;&lt;/script&gt;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>修改之后变成下面这样。其实就是去掉了个别&#x2F;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;link href=static/css/app.33da80d69744798940b135da93bc7b98.css rel=stylesheet&gt;</span><br><span class="line">&lt;script type=text/javascript src=static/js/app.717bb358ddc19e181140.js&gt;&lt;/script&gt;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>修改完以后，双击index.html就可以打开。</p>
+<h3 id="关于打包时node报错"><a href="#关于打包时node报错" class="headerlink" title="关于打包时node报错"></a>关于打包时node报错</h3><p>报错提示：<code>(Use node --trace-warnings ...to show where the warning was created</code><br>在网上查了一下，好像是node版本的问题，vue支持的node版本太低了，得降低版本才行。回头再整个环境管理的玩意才行。</p>
+<h3 id="VUE的目录结构"><a href="#VUE的目录结构" class="headerlink" title="VUE的目录结构"></a>VUE的目录结构</h3><table>
+<thead>
+<tr>
+<th align="left">目录&#x2F;文件</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">build</td>
+<td align="left">项目构建（webpack）相关代码</td>
+</tr>
+<tr>
+<td align="left">config</td>
+<td align="left">配置目录，包括端口号等</td>
+</tr>
+<tr>
+<td align="left">node_modules</td>
+<td align="left">npm加载的项目依赖模块</td>
+</tr>
+<tr>
+<td align="left">src</td>
+<td align="left">开发目录<br>assets：放置图片。<br>components：组件文件。<br>App.vue：项目入口文件<br>main.js：项目的核心文件<br>index.css：样式文件（不建的话没有）<br>router：里面放了个index.js</td>
+</tr>
+<tr>
+<td align="left">static</td>
+<td align="left">静态资源目录</td>
+</tr>
+<tr>
+<td align="left">public</td>
+<td align="left">公共资源目录</td>
+</tr>
+<tr>
+<td align="left">test</td>
+<td align="left">测试目录</td>
+</tr>
+<tr>
+<td align="left">dist</td>
+<td align="left">使用<code>npm run build</code>命令打包之后可以生成目录</td>
+</tr>
+</tbody></table>
+
       
       <!-- reward -->
       
