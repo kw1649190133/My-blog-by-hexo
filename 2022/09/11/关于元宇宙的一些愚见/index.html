@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    如何清除毒瘤DLL |  kw&#39;s blog
+    关于元宇宙的一些愚见 |  kw&#39;s blog
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -32,7 +32,7 @@
   <div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-如何清除毒瘤DLL" class="article article-type-post" itemscope
+  <article id="post-关于元宇宙的一些愚见" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -40,7 +40,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  如何清除毒瘤DLL
+  关于元宇宙的一些愚见
 </h1>
   
 
@@ -49,12 +49,12 @@
 
     
     <div class="article-meta">
-      <a href="/2020/02/25/%E5%A6%82%E4%BD%95%E6%B8%85%E9%99%A4%E6%AF%92%E7%98%A4DLL/" class="article-date">
-  <time datetime="2020-02-25T04:25:57.000Z" itemprop="datePublished">2020-02-25</time>
+      <a href="/2022/09/11/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AE%87%E5%AE%99%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9A%E8%A7%81/" class="article-date">
+  <time datetime="2022-09-11T14:00:03.000Z" itemprop="datePublished">2022-09-11</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
   </div>
 
       
@@ -64,7 +64,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">903字</span>
+            <span class="post-count">1.3k字</span>
         </span>
     </span>
 
@@ -73,7 +73,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">3分钟</span>
+            <span class="post-count">4分钟</span>
         </span>
     </span>
 </div>
@@ -99,34 +99,15 @@
       
 
       
-      <h3 id="我的电脑居然被贴了小广告"><a href="#我的电脑居然被贴了小广告" class="headerlink" title="我的电脑居然被贴了小广告"></a>我的电脑居然被贴了小广告</h3><p>突然发现电脑里被莫名其妙的安装了好几个流氓软件，就好像发现自己家门口被贴了小广告一样，不停地在右下角弹广告，特别烦人，还很难清理掉，于是开始寻找它们隐藏的路径，赶尽杀绝。</p>
-<p>通过右键查看属性，还有任务管理器里的观察，我发现这些个牛皮癣喜欢藏在这两个目录：</p>
-<p>C:&#x2F;User&#x2F;Administrator&#x2F;AppData&#x2F;Local</p>
-<p>C:&#x2F;User&#x2F;Administrator&#x2F;AppData&#x2F;Roaming</p>
-<p>或者直接利用电脑的搜索功能，直接在C盘里搜索毒瘤软件的名字，把找到的目录全都干掉。</p>
-<p>但是这样并没有结束，不然也不叫“牛皮癣了”</p>
-<h3 id="清理注册表"><a href="#清理注册表" class="headerlink" title="清理注册表"></a>清理注册表</h3><p>虽然大佬们习惯用命令行，但win10直接利用桌面的搜索功能，就能直接找到注册表管理器了，更方便。</p>
-<p>同样的，直接在管理器搜索毒瘤软件的名字，看到一个干掉一个。</p>
-<h3 id="清除DLL-动态链接库"><a href="#清除DLL-动态链接库" class="headerlink" title="清除DLL(动态链接库)"></a>清除DLL(动态链接库)</h3><p>在清除软件时，经常会发现，XXX文件正在被占用、正在运行，无法删除，要我们先关闭程序。</p>
-<p>通过tasklist命令，可以将任务管理器的状态输出到文本，这样就可以很方便的用TXT文档的查找功能，锁定DLL的相关应用，然后在任务管理器里把它强制结束掉。win10可以在菜单栏直接右键打开任务管理器，非常方便。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist /m&gt;d:\123.txt </span><br></pre></td></tr></table></figure>
-
-<p>还有一些例如Unlocker的第三方软件，可以查询文件被哪个进程锁定，也可以帮助我们去关闭进程，删除文件。</p>
-<h3 id="毒瘤DLL黑入资源管理器"><a href="#毒瘤DLL黑入资源管理器" class="headerlink" title="毒瘤DLL黑入资源管理器"></a>毒瘤DLL黑入资源管理器</h3><p>有些时候（经常）那些删不掉的文件，一查它的进程，居然是Explorer.exe，那就不能随便强制结束了</p>
-<p>Explorer 就是系统时时刻刻都在运行的桌面，在win10中，因为中文显示优化的原因，它在任务管理器中也显示为“Windows 资源管理器”。一旦这个进程终止，桌面也会随之黑掉，但已经启动的应用基本不受影响。</p>
-<p>这时也可以根据先结束进程，再杀掉文件的原理，通过关闭桌面来杀掉毒瘤DLL。但是也因为要关闭桌面，正常的图形界面就无法使用了，必须借助控制台来操作。</p>
-<ol>
-<li>找到文件的路径，复制下来</li>
-<li>以管理员限权，运行控制台CMD</li>
-<li>任务管理器结束资源管理器进程，关闭桌面，这时候桌面会直接灰掉。</li>
-<li>通过控制台，cd指令，进入到文件的路径下。</li>
-<li>通过 Del 文件名 的命令，删除文件（注意中间有空格）。</li>
-<li>在任务管理器中新建进程，输入Explorer.exe，重新启动桌面。</li>
-</ol>
-<p>到此一切终于回到了正轨。桌面终于清静了。</p>
-<p>相比这么麻烦的清理步骤，还是平时注意保持健康的使用习惯更为重要。</p>
-<p>（我看到那几个毒瘤DLL的修改记录，居然是去年就已经在我的电脑里了，欺负我以前不懂）</p>
-<h3 id="最终手段"><a href="#最终手段" class="headerlink" title="最终手段"></a>最终手段</h3><p> 重新启动可以解决90%的计算机问题，重装系统可以解决99.9%的问题。<br> 更重要的还是在使用中养成好习惯，不安装来源不明的软件，有风险的软件最好安装在隔离环境中。</p>
+      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近工作告一段落，开始有一些闲暇时间，开始接触什么数字孪生、元宇宙之类的东西。尽管查了一些资料，但总觉得理解得太片面，需要整理一下知识碎片。中秋节放假在书店里看了一本书，叫做《简单元宇宙》，于是有了一点灵感，遂将想法记录下来，尽管不一定正确。</p>
+<h2 id="元宇宙与多元宇宙"><a href="#元宇宙与多元宇宙" class="headerlink" title="元宇宙与多元宇宙"></a>元宇宙与多元宇宙</h2><p>之前一直没能理解，什么是元宇宙，感觉像是一个生造出来的词语一样。<br>但是在书中看到了把元宇宙和多元宇宙放在一起解释的说法，一下子就清晰了起来。<br>所以按我的理解，应该是这样的：<br>元宇宙，即我们所处的世界，是最基本的宇宙，而从中可以衍生出许多其他的附属宇宙空间。元，即元初，元始之意。<del>以常识来判断的话，这一段是一句正确的废话</del><br>多元宇宙，即存在多个宇宙，它们或相对独立，或存在一定关联。这一概念在以漫威为代表的许多美国电影里面已经有许多的体现了，要是看过这些电影的人应该立刻能理解。<br>而现在互联网行业所提的元宇宙，也就是以我们现实的宇宙为基础，延伸出其他虚拟的宇宙。以网络游戏《最终幻想14》为例子的话，也就是现实中的我，操作着游戏中的角色，以冒险者的角色在虚拟的艾欧泽亚大陆冒险。</p>
+<h2 id="元宇宙的形成条件"><a href="#元宇宙的形成条件" class="headerlink" title="元宇宙的形成条件"></a>元宇宙的形成条件</h2><p>那么网络游戏就是元宇宙了吗，也并不是，因为元宇宙还需要满足其他的一些条件。</p>
+<ul>
+<li>元宇宙里的资产，是收到保护的，不会轻易消失或者挪用。就像我们用的微信零钱、支付宝一样，虽然上面只有一个数字，但一般情况我们并不需要担心这个钱莫名的消失。而游戏的账号，所有权完全在游戏公司手里，哪天游戏停服了，什么都不会剩下，公司也不会把你充的钱退给你。</li>
+<li>元宇宙里的资产，要具备通用性。还是举支付宝的例子，像这样虽然把现金变成了电子数据，但它仍然在哪都可以花，甚至可以在国外花。而游戏里的角色、等级、能力、装备，在这家的游戏里可以用，而换一款游戏，就得一切从头开始，所以说元宇宙像网络游戏，但网络游戏不是元宇宙。电影《头号玩家》里的绿洲，倒是非常符合元宇宙的畅想。</li>
+<li>元宇宙里面，需要能够进行生产活动。这也是为什么网络游戏不是元宇宙的另一个重要原因，元宇宙不能只是一个从现实。从现实一点的角度出发，元宇宙空间里，应该能够进行内容的生产，并且能够产出产品到现实世界，从而实现对现实的影响，或者说，它本身就是现实的一部分。目前的技术也不可能做到虚拟空间里种出粮食来再放到现实中吃，这已经是魔法了。以目前的技术水平，能做到在虚拟空间中创作文化产品就不错了，像现在已经有的AR作画，51world的虚拟办公室等。<br>所以综上所述，我觉得现在的情况就是：<strong>我们习以为常的日常生活中，其实已经融入了元宇宙的部分要素或者特征，但它们都分散在各种各样的系统或者产品当中，并不能通过简单的拼凑或者融合来实现或者进化出一个元宇宙出来。</strong><br>那么如何构建一个元宇宙呢，这个问题应该由那些掌握了社会绝大多数资源的人来回答。以我的见识和资源，并不足以支持我做出睿智的判断。<br>说了这么多，所谓的元宇宙，也就和以前的量子科技一样。量子理论是存在的吗？当然是的，至今还有许多科学家们在不断地探索着人类未知的领域，向科学家们致敬。那现在市面上查到的以量子为噱头的产品是真的吗？当然绝大多数是假的，目前并没有量子技术投入到商业当中，就连量子计算机之类的东西，目前也只是在实验室里，市场上的“量子”二字只是商人们拿来炒作的工具罢了。</li>
+</ul>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>以上一切仅为个人愚见，不是真理，也不代表任何人。<br>作为站在二十一世纪的路口的打工人，我希望自己秉持对未知事物的尊重躬身而行。<strong>路漫漫其修远兮，吾将上下而求索。</strong></p>
 
       
       <!-- reward -->
@@ -179,14 +160,14 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://kw1649190133.github.io/2020/02/25/%E5%A6%82%E4%BD%95%E6%B8%85%E9%99%A4%E6%AF%92%E7%98%A4DLL/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://kw1649190133.github.io/2022/09/11/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AE%87%E5%AE%99%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9A%E8%A7%81/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DLL%E6%B8%85%E7%90%86/" rel="tag">DLL清理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%AF%92%E7%98%A4%E8%BD%AF%E4%BB%B6/" rel="tag">毒瘤软件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%B5%E8%84%91%E6%B8%85%E7%90%86/" rel="tag">电脑清理</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%83%E5%AE%87%E5%AE%99/" rel="tag">元宇宙</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E5%85%83%E5%AE%87%E5%AE%99/" rel="tag">多元宇宙</a></li></ul>
 
 
     </footer>
@@ -197,19 +178,10 @@
   
   <nav class="article-nav">
     
-      <a href="/2022/05/20/Cesium%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            Cesium学习-（一）环境搭建
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/02/14/%E5%9C%A8%E7%BD%91%E9%A1%B5%E4%B8%8A%E5%8A%A0%E5%85%A5live2D%E4%BA%BA%E5%81%B6/" class="article-nav-link">
+      <a href="/2022/09/05/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E4%B8%8E%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">在网页上加入live2D人偶</div>
+        <div class="article-nav-title">版本控制与环境管理</div>
       </a>
     
   </nav>
