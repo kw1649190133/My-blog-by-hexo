@@ -66,6 +66,188 @@
     
     
     
+    <article id="post-数据格式3Dtiles和osgb的学习" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/05/30/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F3Dtiles%E5%92%8Cosgb%E7%9A%84%E5%AD%A6%E4%B9%A0/"
+    >数据格式3Dtiles和osgb的学习</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/05/30/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F3Dtiles%E5%92%8Cosgb%E7%9A%84%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2022-05-30T10:00:00.000Z" itemprop="datePublished">2022-05-30</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p>今天整理了一下关于前几天学习模型格式的笔记</p>
+<h2 id="OSGB格式"><a href="#OSGB格式" class="headerlink" title="OSGB格式"></a>OSGB格式</h2><p>osgb格式的模型数据，无论是.s3c文件还是Data中的.osgb，打开都是人类难以理解的16进制码，只有.xml文件里记录了一些信息。<br>可以很明显的看到里面有投影坐标系、中央子午线、地理坐标系，地理坐标和高程等信息，程序在使用模型时，就可以根据这些位置信息，将文件夹中碎片的模型数据准确的摆放在正确的坐标上。而模型的数据，没有相应程序的解析就是个黑匣子（文件夹的名称也应当符合程序要求）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;ModelMetadata version=&quot;1&quot;&gt;</span><br><span class="line">	&lt;SRS&gt;PROJCS[&amp;quot;CGCS2000 / 3-degree Gauss-Kruger CM 109.91666667E&amp;quot;,	    GEOGCS[&amp;quot;China Geodetic Coordinate System 2000&amp;quot;,	        DATUM[&amp;quot;China_2000&amp;quot;,	            SPHEROID[&amp;quot;CGCS2000&amp;quot;,6378137,298.257222101,	                AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;1024&amp;quot;]],	            AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;1043&amp;quot;]],	        PRIMEM[&amp;quot;Greenwich&amp;quot;,0,	            AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;8901&amp;quot;]],	        UNIT[&amp;quot;degree&amp;quot;,0.0174532925199433,	            AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;9122&amp;quot;]],	        AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;4490&amp;quot;]],	    PROJECTION[&amp;quot;Transverse_Mercator&amp;quot;],	    PARAMETER[&amp;quot;latitude_of_origin&amp;quot;,0],	    PARAMETER[&amp;quot;central_meridian&amp;quot;,109.91666667],	    PARAMETER[&amp;quot;scale_factor&amp;quot;,1],	    PARAMETER[&amp;quot;false_easting&amp;quot;,500000],	    PARAMETER[&amp;quot;false_northing&amp;quot;,0],	    UNIT[&amp;quot;metre&amp;quot;,1,	        AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;9001&amp;quot;]],	    AUTHORITY[&amp;quot;EPSG&amp;quot;,&amp;quot;4545&amp;quot;]]&lt;/SRS&gt;</span><br><span class="line">	&lt;SRSOrigin&gt;507021.25,2057836.2,46.4&lt;/SRSOrigin&gt;</span><br><span class="line">&lt;/ModelMetadata&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3Dtiles格式"><a href="#3Dtiles格式" class="headerlink" title="3Dtiles格式"></a>3Dtiles格式</h2><p>而3Dtiles格式的数据，就有好多个可以阅读的文本。<br>也就是.json文件。但是要注意模型加载的前提是需要有顶层json路径，若没有则需要进行顶层重建。<br>下面是一段实例的展示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;asset&quot;: &#123;</span><br><span class="line">		&quot;version&quot;: &quot;0.0&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;geometricError&quot;: 89.0000000063020877,</span><br><span class="line">	&quot;root&quot;: &#123;</span><br><span class="line">		&quot;boundingVolume&quot;: &#123;</span><br><span class="line">			&quot;sphere&quot;: [-1832255.4880568594671786, 4636065.7251678528264165, 3967474.6662561106495559, 92.5177488416835700]</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;refine&quot;: &quot;replace&quot;,</span><br><span class="line">		&quot;geometricError&quot;: 2,</span><br><span class="line">		&quot;content&quot;: &#123;</span><br><span class="line">			&quot;url&quot;: &quot;Tile_p000_p000.b3dm&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;children&quot;: [&#123;</span><br><span class="line">			&quot;boundingVolume&quot;: &#123;</span><br><span class="line">				&quot;sphere&quot;: [-1832256.7506676781922579, 4636064.3549550874158740, 3967471.9338256986811757, 53.0235926788538521]</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;geometricError&quot;: 1,</span><br><span class="line">			&quot;content&quot;: &#123;</span><br><span class="line">				&quot;url&quot;: &quot;Tile_p000_p000_L16_0.b3dm&quot;</span><br><span class="line">			&#125;,</span><br><span class="line">			&quot;children&quot;: [&#123;</span><br><span class="line">				&quot;boundingVolume&quot;: &#123;</span><br><span class="line">					&quot;sphere&quot;: [-1832256.7506676781922579, 4636064.3549550874158740, 3967471.9338256986811757, 53.0235926788538521]</span><br><span class="line">				&#125;,</span><br><span class="line">				&quot;geometricError&quot;: 0.5000000000000000,</span><br><span class="line">				&quot;content&quot;: &#123;</span><br><span class="line">					&quot;url&quot;: &quot;Tile_p000_p000_L17_00.b3dm&quot;</span><br><span class="line">				&#125;,</span><br><span class="line">				&quot;children&quot;: [&#123;</span><br><span class="line">					&quot;boundingVolume&quot;: &#123;</span><br><span class="line">						&quot;sphere&quot;: [-1832256.7506676781922579, 4636064.3549550874158740, 3967472.1795567460358143, 52.9021132641717458]</span><br><span class="line">					&#125;,</span><br><span class="line">					&quot;geometricError&quot;: 0.2500000000000000,</span><br><span class="line">					&quot;content&quot;: &#123;</span><br><span class="line">						&quot;url&quot;: &quot;Tile_p000_p000_L18_000.json&quot;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;]</span><br><span class="line">			&#125;]</span><br><span class="line">		&#125;]</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结合实际案例和一些其他资料，大概可以整理成下面这个样式。<br>虽然json的文件格式是可以直接阅读的，但是套娃式的复杂结构决定了实际在处理大批量数据时，还是要依靠机器处理。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;asset&quot;: &#123;&quot;version&quot;: &quot;0.0&quot;&#125;,\\记录整个数据集的声明和归属</span><br><span class="line"></span><br><span class="line">	&quot;geometricError&quot;: 89.0000000063020877,</span><br><span class="line">	\\几何误差，用来控制不同比例尺下模型的显隐。这个数值父级瓦片一定比子级瓦片大，可以理解为放大后就能看到更多的模型细节。</span><br><span class="line"></span><br><span class="line">	&quot;root&quot;: &#123;</span><br><span class="line">		&quot;boundingVolume&quot;: &#123;</span><br><span class="line">			&quot;sphere&quot;: [-1832255.4880568594671786, 4636065.7251678528264165, 3967474.6662561106495559, 92.5177488416835700]</span><br><span class="line">		&#125;,</span><br><span class="line">        \\boundingVolume 数据框架，有三种类型</span><br><span class="line"></span><br><span class="line">		&quot;refine&quot;: &quot;replace&quot;,</span><br><span class="line">		\\加载方式</span><br><span class="line"></span><br><span class="line">		&quot;geometricError&quot;: 2,</span><br><span class="line">		\\几何误差</span><br><span class="line"></span><br><span class="line">		&quot;content&quot;: &#123;</span><br><span class="line">			&quot;url&quot;: &quot;Tile_p000_p000.b3dm&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		\\content 这个root链接的数据的地址，好像url和uri都可以。可以是子结点的json。父节点可以无限引用子节点，但是子节点不能循环引用父结点。</span><br><span class="line"></span><br><span class="line">		&quot;children&quot;: [&#123;  ]&#125;</span><br><span class="line">		\\开始套娃，里面是这个root的子叶结点</span><br><span class="line"></span><br><span class="line"> 	&#125;\\root是数据集的根瓦片，记录了大量的信息。</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>3Dtiles允许数据集使用的四种树状结构：<br>四叉树、八叉树、KD树、格网结构。<br>四叉树可以理解为平面上的一个正方形，横竖两刀切成四块，也就成了四个子叶结点。<br>八叉树可以理解为四叉树增加了一个维度，变成一个正方体切三刀变为八个小正方体。<br>模型的树形分支构造也会影响加载速度，越大的切片文件加载越慢，根据实际需要进行选择。</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>3Dtiles的数据也是以瓦片形式保存的，而且瓦片的类型并不唯一，具体有</p>
+<h4 id="b3dm"><a href="#b3dm" class="headerlink" title="b3dm"></a>b3dm</h4><p>传统的三维建模数据、BIM数据、倾斜摄影数据。（也是做大范围场景最常用的数据）</p>
+<h4 id="i3dm"><a href="#i3dm" class="headerlink" title="i3dm"></a>i3dm</h4><p>一个模型多次渲染，例如路灯、售货机、摄像头</p>
+<h4 id="pnts"><a href="#pnts" class="headerlink" title="pnts"></a>pnts</h4><p>点云数据</p>
+<h4 id="cmpt"><a href="#cmpt" class="headerlink" title="cmpt"></a>cmpt</h4><p>前三种数据的符合，一个cmpt文件里可以内嵌多个其他类型的瓦片。</p>
+<p>3Dtiles的基础是glTF，全称为Graphics Language Transmission Format （图形语言传输格式），针对WebGL、OpenGL等接口的运行时数据传输格式。所以3Dtiles实际的文件后缀名是glTF决定的，而3Dtiles是为了加载海量的三维数据，在glTF的基础上加入了分层概念，使其适应倾斜摄影、点云等大规模数据的加载。<br>2017年公布glTF2.0标准，2022年初公布3Dtiles Next标准（二代）。</p>
+<h2 id="URL-URN-x3D-URI"><a href="#URL-URN-x3D-URI" class="headerlink" title="URL + URN &#x3D; URI"></a>URL + URN &#x3D; URI</h2><p>在使用模型时会遇到的<br>URL 统一资源定位符，是表示引用地址的字符串。主要用于连接网页、网页组件或网页程序，用访问方法来检索资源位置。<br>URL包含<br>1、用于访问资源的协议<br>2、服务器的位置<br>3、服务器端口号（可选）<br>4、资源在服务器目录结构中的位置<br>5、片段标识符（可选）<br>URI 统一资源标识符，标识逻辑或物理资源的字符序列。定义项目的标识，将一个资源与其他资源区分开。<br>URI 包含<br>1、Scheme（方案）<br>2、权限组件<br>3、查询（可选）<br>4、片段（可选）</p>
+<h2 id="一些其他知识点："><a href="#一些其他知识点：" class="headerlink" title="一些其他知识点："></a>一些其他知识点：</h2><p>1、osgb是对人类友好的对象型数据；3Dtiles格式则为对GPU友好的图形编程型数据，一切为了渲染速度服务。</p>
+<p>2、osgb到3Dtiles为单向转换，反向的成本过高几乎不考虑。</p>
+<p>3、使用FME也可以进行osgb对3Dtiles的转换（但是目前尝试没有成功）</p>
+<p>4、glTF1.0 和 glTF2.0 的不同可能会于Cesium的不同版本有不兼容的情况，过于深入暂不研究。</p>
+<h2 id="一些相关的软件平台："><a href="#一些相关的软件平台：" class="headerlink" title="一些相关的软件平台："></a>一些相关的软件平台：</h2><p>CesiumLab<br>Mars3D</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/3Dtiles/" rel="tag">3Dtiles</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cusium/" rel="tag">Cusium</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/osgb/" rel="tag">osgb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/" rel="tag">数据格式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-hexo升级与环境整理" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/05/26/hexo%E5%8D%87%E7%BA%A7%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%95%B4%E7%90%86/"
+    >hexo升级与环境整理</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/05/26/hexo%E5%8D%87%E7%BA%A7%E4%B8%8E%E7%8E%AF%E5%A2%83%E6%95%B4%E7%90%86/" class="article-date">
+  <time datetime="2022-05-26T10:35:00.000Z" itemprop="datePublished">2022-05-26</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <p>太长时间没打理blog了，现在抽空搞一搞。把本地文件复制到工作的小笔记本上，看着以前自己的笔记重新安装环境，设置连接，但是又发现了一堆问题，怎么也无法上传。</p>
+<p>百度了一下别人的代码进行一键升级。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 使用淘宝源的 cnpm 替换 npm</span><br><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line"></span><br><span class="line">cnpm install -g cnpm                 # 升级 npm</span><br><span class="line">cnpm cache clean -f                 # 清除 npm 缓存</span><br><span class="line"></span><br><span class="line">===更新 hexo: 进入 blog 目录，执行如下命令=== </span><br><span class="line"># 更新 package.json 中的 hexo 及个插件版本</span><br><span class="line">cnpm install -g npm-check           # 检查之前安装的插件，都有哪些是可以升级的 </span><br><span class="line">cnpm install -g npm-upgrade         # 升级系统中的插件</span><br><span class="line">npm-check</span><br><span class="line">npm-upgrade</span><br><span class="line"></span><br><span class="line"># 更新 hexo 及所有插件</span><br><span class="line">cnpm update</span><br><span class="line"></span><br><span class="line"># 确认 hexo 已经更新</span><br><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+
+<p>又发现个新警告：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“use_date_for_updated“ is deprecated, please use “updated_option“ instead</span><br></pre></td></tr></table></figure>
+<p>就是官方把函数名改了，去配置文件_config.yml里把“use_date_for_updated”改成“updated_option“。</p>
+<p>然后又是在上传过程中的新错误</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spawn failed 128</span><br></pre></td></tr></table></figure>
+<p>首先尝试了删除.deploy_git文件夹，输入git config –global core.autocrlf false然后执行hexo clean清理缓存。<br>但并没有解决问题</p>
+<p>输入代码检测ssh是否生效</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh git@github.com</span><br></pre></td></tr></table></figure>
+<p>出现以下结果说明ssh正常</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PTY allocation request failed on channel 0</span><br><span class="line">Hi [yourname]! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br><span class="line">Connection to github.com closed.</span><br></pre></td></tr></table></figure>
+
+<p>查了以下好像21年8月以后不支持用户名密码的方式认证了，要创建个人令牌。</p>
+<p>于是来到github官网，在个人设置（setting）中找到开发人员设置（Devoloper settings）<br>点击个人访问令牌（Personal access tokens），创建个令牌（Generate new token）</p>
+<p>设置令牌信息，时间可以选永久，许可可以全点上<br>得到令牌代码后复制保存，在登陆的时候就可以选择令牌登陆了</p>
+<p>hexo d之后等了一会儿，终于看到了更新。<br>至此一年多没打理的blog重新启用。</p>
+<hr>
+<p>补充：<br>第二天进行上传的时候又遇到了同样的问题，再补充一条代码后解决</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br></pre></td></tr></table></figure>
+      
+      <!-- reward -->
+      
+    </div>
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%87%E7%BA%A7/" rel="tag">升级</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%97%AE%E9%A2%98%E4%BF%AE%E5%A4%8D/" rel="tag">问题修复</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-Cesium学习（一）环境搭建" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 

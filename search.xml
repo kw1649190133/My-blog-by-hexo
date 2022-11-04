@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>关于BlanderGIS的安装和配置</title>
+    <url>/2022/11/04/%E5%85%B3%E4%BA%8EBlanderGIS%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h2 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h2><p>安装好blander以后，不用解压BlanderGIS的压缩包，打开blander,在插件中添加压缩包的路径。打勾后重启Blander,就会出现GIS菜单。</p>
+<h2 id="“No-ImageIO”错误"><a href="#“No-ImageIO”错误" class="headerlink" title="“No ImageIO”错误"></a>“No ImageIO”错误</h2><p>打开GIS菜单，加载地图的时候会出现“No ImageIO”错误，需要手动下载文件进行替换。</p>
+<p>FreeImage的下载地址：<br><a href="https://github.com/imageio/imageio-binaries/tree/master/freeimage">https://github.com/imageio/imageio-binaries/tree/master/freeimage</a><br>window系统的替换文件位置<br>C:\Users\admin\AppData\Roaming\Blender Foundation\Blender\2.83\scripts\addons\BlenderGIS\core\lib\imageio</p>
+<p>建立一个freeimage文件夹，然后将相应版本的文件放入其中<br>例如:freeimage\FreeImage-3.15.1-win64.dll</p>
+<p>这个应该是linux系统的路径<br>&#x2F;Contents&#x2F;Resources&#x2F;3.1&#x2F;scripts&#x2F;addons&#x2F;BlenderGIS-master&#x2F;core&#x2F;lib&#x2F;imageio&#x2F;resources</p>
+<h2 id="加载地图"><a href="#加载地图" class="headerlink" title="加载地图"></a>加载地图</h2><p>谷歌之类的地图可能因为墙的原因无法加载，国内的地图需要申请。可以去天地图申请token，然后放在插件中，就可以加载地图。</p>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>blander</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OSGB格式的打开方式</title>
+    <url>/2022/11/04/OSGB%E6%A0%BC%E5%BC%8F%E7%9A%84%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="OSGB简介"><a href="#OSGB简介" class="headerlink" title="OSGB简介"></a>OSGB简介</h2><p>OSGB全称为Open Scene Gragh Binary,是开源三维渲染引擎OpenSceneGraph（OSG）数据文件格式的二进制版本，同时也是目前倾斜摄影模型（尤其是使用CC处理的模型）常用的存储格式。</p>
+<h2 id="解析OSGB"><a href="#解析OSGB" class="headerlink" title="解析OSGB"></a>解析OSGB</h2><p>由于OSG是用C++编写的，而且OSGB又是二进制格式，在解析上就存在一定的难度，如果完全从头编写解析程序的话，需要熟练掌握OSG，甚至需要深入源码，对Web开发者来说是一件不那么容易的事。</p>
+<p>参考链接:[OSG中文社区 <a href="http://www.osgchina.org/]:http://www.osgchina.org/">http://www.osgchina.org/]:http://www.osgchina.org/</a></p>
+<h2 id="可以打开OSGB的软件"><a href="#可以打开OSGB的软件" class="headerlink" title="可以打开OSGB的软件"></a>可以打开OSGB的软件</h2><ol>
+<li>CC Viewer 需要制作s3c链接</li>
+<li>DasViewer 来自武汉大势智慧，免费使用但功能有限</li>
+<li>OsgbLab 倾斜伴侣，强大的Osgb格式转换器，但大型转换任务要收费，浏览模型的功能有限</li>
+</ol>
+<ul>
+<li>除此之外一些大品牌的地理信息处理软件，例如eFeature、中海达HiData等也可以直接打开osgb格式的模型。</li>
+<li>另外就是通过Cesium、Unity、虚幻之类的引擎，自己搭建渲染环境，制作界面，加载模型。学习成本较高</li>
+</ul>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>osgb</tag>
+        <tag>三维模型</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关于元宇宙的一些愚见</title>
     <url>/2022/09/11/%E5%85%B3%E4%BA%8E%E5%85%83%E5%AE%87%E5%AE%99%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9A%E8%A7%81/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近工作告一段落，开始有一些闲暇时间，开始接触什么数字孪生、元宇宙之类的东西。尽管查了一些资料，但总觉得理解得太片面，需要整理一下知识碎片。中秋节放假在书店里看了一本书，叫做《简单元宇宙》，于是有了一点灵感，遂将想法记录下来，尽管不一定正确。</p>
